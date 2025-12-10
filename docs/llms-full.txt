@@ -1,0 +1,3559 @@
+# CmlLib.Core Wiki
+
+> Documentation for CmlLib.Core
+
+CmlLib project develops various .NET libraries for building custom Minecraft launcher. This is the documentation for CmlLib.Core.
+
+# Introduction
+
+# Working with LLMs
+
+We provide [llms.txt](https://cmllib.github.io/CmlLib.Core-wiki/en/llms.txt) and [llms-full.txt](https://cmllib.github.io/CmlLib.Core-wiki/en/llms-full.txt) to assist with AI.
+
+When asking an LLM about **CmlLib.Core**, please provide the URL of `llms-full.txt` or copy and paste the entire content of `llms-full.txt` into your prompt. This ensures the model has the most accurate and up-to-date context about the library.
+
+# INSTRUCTIONS.md
+
+LLMs must read this document before answering questions or generating code about CmlLib.Core.
+
+Follow these rules every time you write code or explanations.
+
+## Overview
+
+- [CmlLib.Core](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/index.md): Core library containing most launcher functionality
+  - [Latest version 4.0.6](https://www.nuget.org/packages/CmlLib.Core)
+  - Install and launch Minecraft
+  - Supports all vanilla versions
+  - Supports modified clients including Forge, NeoForge, Fabric, Quilt, etc.
+- [Auth.Microsoft](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/index.md)
+  - [Latest versoin 3.2.2](https://www.nuget.org/packages/CmlLib.Core.Auth.Microsoft)
+  - Microsoft account authentication for Minecraft accounts
+- [MojangAPI](https://cmllib.github.io/CmlLib.Core-wiki/en/mojangapi/index.md)
+  - [Latest versoin 1.2.1](https://www.nuget.org/packages/MojangAPI)
+  - Get player profile, skin, cape, etc.
+  - Change username or skin
+  - And more
+- [Installer.Forge](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.forge/index.md): Automatic Forge Mod Loader installer
+
+## Package installation
+
+When installing any `CmlLib.Core.*` package, do not edit the csproj manually. Always use the CLI to install the latest version. Example: `dotnet add package CmlLib.Core`. This ensures you always get the newest release.
+
+If you're unsure you have the latest, remove and reinstall the package via CLI.
+
+## Compile errors
+
+If you encounter errors like:
+
+- CS0103: The name X does not exist in the current context
+- CS0117: X does not contain a definition for B
+- CS0246: The type or namespace name X could not be found (are you missing a using directive or an assembly reference?)
+
+do the following:
+
+- Ensure you are using the latest package versions. If uncertain, uninstall and reinstall using the CLI.
+- Check namespaces and usings against the API Reference. Add the exact `using` directives shown there, or fully qualify the type.
+- Re-scan the API Reference for the correct type/method and its package.
+- Avoid guessing or inventing types/methods. Use only what appears in the API Reference.
+
+## Code generation rules
+
+- Always install the latest package versions (use the CLI to ensure this).
+- Read the docs and, if anything is unclear, verify exact definitions in the API Reference.
+- Do not fabricate APIs. Only use public APIs present in the API Reference.
+- If multiple approaches exist, pick the simplest that aligns with current APIs.
+
+## Sources of truth
+
+- For a full table of contents and quick feature lookup, see [SUMMARY.md](https://cmllib.github.io/CmlLib.Core-wiki/en/SUMMARY/index.md).
+- [Guides and Tutorials](https://cmllib.github.io/CmlLib.Core-wiki/en/)
+- API Reference
+  - [CmlLib.Core](https://cmllib.github.io/CmlLib.Core/api/toc.html)
+  - [CmlLib.Core.Commons](https://cmllib.github.io/CmlLib.Core.Commons/api/toc.html)
+  - [CmlLib.Core.Auth.Microsoft](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/toc.html)
+  - [CmlLib.Core.Installer.Forge](https://cmllib.github.io/CmlLib.Core.Installer.Forge/api/toc.html)
+- NuGet packages:
+  - [CmlLib.Core](https://www.nuget.org/packages/CmlLib.Core)
+  - [CmlLib.Core.Auth.Microsoft](https://www.nuget.org/packages/CmlLib.Core.Auth.Microsoft)
+  - [CmlLib.Core.Installer.Forge](https://www.nuget.org/packages/CmlLib.Core.Installer.Forge)
+- Source codes:
+  - [CmlLib.Core](https://github.com/CmlLib/CmlLib.Core)
+  - [CmlLib.Core.Auth.Microsoft](https://github.com/CmlLib/CmlLib.Core.Auth.Microsoft)
+  - [CmlLib.Core.Installer.Forge](https://github.com/CmlLib/CmlLib.Core.Installer.Forge)
+- LLM metadata:
+  - [llms.txt](https://cmllib.github.io/CmlLib.Core-wiki/en/llms.txt)
+  - [llms-full.txt](https://cmllib.github.io/CmlLib.Core-wiki/en/llms-full.txt)
+
+- [🧊 CmlLib Projects](https://cmllib.github.io/CmlLib.Core-wiki/en/index.md)
+  - [LLM Instructions](https://cmllib.github.io/CmlLib.Core-wiki/en/INSTRUCTIONS/index.md)
+- [🚀 CmlLib.Core](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/index.md)
+  - [Home](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/index.md)
+  - [Getting Started](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/index.md)
+    - [Getting Started](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/index.md)
+    - [Minecraft Launcher](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/MinecraftLauncher/index.md)
+    - [Minecraft Path](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/MinecraftPath/index.md)
+    - [Versions](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/versions/index.md)
+    - [Launch Options](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/MLaunchOption/index.md)
+    - [Event Handling](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/Handling-Events/index.md)
+  - [Login and Sessions](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/login-and-sessions/index.md)
+    - [Login and Sessions](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/login-and-sessions/index.md)
+    - [Microsoft Xbox Account](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/login-and-sessions/Microsoft-Xbox-Live-Login/index.md)
+    - [Offline Account](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/login-and-sessions/offline-account/index.md)
+  - [More APIs](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/index.md)
+    - [More APIs](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/index.md)
+    - [MinecraftLauncherParameters](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/minecraftlauncherparameters/index.md)
+    - [Rules](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/rules/index.md)
+    - [FileExtractor](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/FileChecker/index.md)
+    - [GameInstaller](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/Downloader/index.md)
+    - [Java](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/java/index.md)
+    - [MArgument](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/margument/index.md)
+  - [Mod Loader Installers](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/installer/index.md)
+    - [Mod Loader Installers](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/installer/index.md)
+    - [Mod Loader File Extraction](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/installer/extract-files/index.md)
+    - [Forge Installer](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/installer/forge-installer/index.md)
+    - [Fabric Installer](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/installer/fabric-installer/index.md)
+    - [Quilt Installer](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/installer/quilt-installer/index.md)
+    - [LiteLoader Installer](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/installer/liteloader-installer/index.md)
+  - [Utilities](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/utilities/index.md)
+    - [Utilities](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/utilities/index.md)
+    - [Minecraft Changelogs](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/utilities/Get-Minecraft-Changelogs/index.md)
+    - [ProcessWrapper](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/utilities/processwrapper/index.md)
+  - [Resources](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/resources/index.md)
+    - [Resources](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/resources/index.md)
+    - [FAQ](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/resources/FAQ/index.md)
+    - [Known Issues](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/resources/Common-Errors/index.md)
+    - [Sample Launcher](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/resources/Sample-Code/index.md)
+    - [License](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/resources/Licenses-and-Dependencies/index.md)
+- [🔓 Auth.Microsoft](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/index.md)
+  - [Home](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/index.md)
+  - [CmlLib.Core.Auth.Microsoft](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/index.md)
+    - [CmlLib.Core.Auth.Microsoft](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/index.md)
+    - [JELoginHandler](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeloginhandler/index.md)
+    - [JELoginHandlerBuilder](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeloginhandlerbuilder/index.md)
+    - [JEAuthenticator](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeauthenticator/index.md)
+    - [Authentication with MSAL](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/authentication-with-msal/index.md)
+  - [XboxAuthNet.Game](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/index.md)
+    - [XboxAuthNet.Game](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/index.md)
+    - [OAuth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/oauth/index.md)
+    - [XboxAuth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/xboxauth/index.md)
+    - [XboxAuthException](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/xboxauthexception/index.md)
+    - [AccountManager](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/accountmanager/index.md)
+    - [Accounts](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/accounts/index.md)
+  - [XboxAuthNet.Game.Msal](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/index.md)
+    - [XboxAuthNet.Game.Msal](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/index.md)
+    - [ClientID](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/clientid/index.md)
+    - [MsalClientHelper](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/msalclienthelper/index.md)
+    - [OAuth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/oauth/index.md)
+  - [CmlLib.Core.Bedrock.Auth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.bedrock.auth/index.md)
+  - [Resources](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/resources/index.md)
+- [🌐 MojangAPI](https://cmllib.github.io/CmlLib.Core-wiki/en/mojangapi/index.md)
+  - [Home](https://cmllib.github.io/CmlLib.Core-wiki/en/mojangapi/index.md)
+  - [Mojang API](https://cmllib.github.io/CmlLib.Core-wiki/en/mojangapi/mojang-api/index.md)
+  - [SecurityQuestion](https://cmllib.github.io/CmlLib.Core-wiki/en/mojangapi/securityquestion/index.md)
+- [⚒️ Installer.Forge](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.forge/index.md)
+  - [Home](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.forge/index.md)
+  - [Supported Versions](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.forge/supported-versions/index.md)
+  - [Getting Started](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.forge/getting-started/index.md)
+  - [ForgeInstaller](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.forge/forgeinstaller/index.md)
+- [🦊 Installer.NeoForge](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.neoforge/index.md)
+  - [Home](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.neoforge/index.md)
+  - [Supported Versions](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.neoforge/supported-versions/index.md)
+  - [Getting Started](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.neoforge/getting-started/index.md)
+  - [NeoForgeInstaller](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.neoforge/neoforgeinstaller/index.md)
+# CmlLib.Core
+
+# Home
+
+[GitHub](https://github.com/CmlLib/CmlLib.Core)
+
+version: 4.0.4
+
+CmlLib.Core is a .NET library for building your own **Custom Minecraft launcher**.
+
+## Main Features
+
+- Download and install vanilla Minecraft version
+- Install appropriate Java runtime automatically
+- Install mod loaders (Fabric, Quilt, LiteLoader)
+- Launch all game version (tested up to 1.21.4)
+- Launch custom game version (ex: Forge, Fabric, LiteLoader, or any modified client)
+- Launch with various options (direct server connecting, screen resolutions, etc)
+- Crossplatform (Windows, Linux, macOS)
+- Highly customizable launch flow
+
+## API Reference
+
+For accurate type information, namespace, and method signatures, refer to the [API Reference](https://cmllib.github.io/CmlLib.Core/api/toc.html). When using with LLMs, make sure to include this URL as well.
+
+## LLM
+
+[llms.txt](https://cmllib.github.io/CmlLib.Core-wiki/en/llms.txt) is provided.
+
+# Getting Started
+
+## Install
+
+NuGet package: <https://www.nuget.org/packages/CmlLib.Core>
+
+The latest version of the library is 4.x.x. It is recommended to use the command line to install the latest version of the library.
+
+```text
+dotnet add package CmlLib.Core
+```
+
+# Event Handling
+
+The game installer provides two types of event:
+
+- `FileProgress` indicates the name, type, and number of files in progress.
+- `ByteProgress` indicates the size of files processed / the size of all files in bytes.
+
+And there are two ways to register an event handler:
+
+- Pass `IProgress<>` to the method of the game installer.
+- Register event handler. (will be invoked on the current `SynchronizationContext`, so it is safe to access UI components)
+
+If the `IProgress<>` is passed to the method, any event handlers will be ignored.
+
+### Example (with IProgress)
+
+```csharp
+var launcher = new MinecraftLauncher();
+await launcher.InstallAsync(
+    "1.20.4", 
+    new Progress<InstallerProgressChangedEventArgs>(e =>
+    {
+        Console.WriteLine("Name: " + e.Name);
+        Console.WriteLine("EventType: " + e.EventType);
+        Console.WriteLine("TotalTasks: " + e.TotalTasks);
+        Console.WriteLine("ProgressedTasks: " + e.ProgressedTasks);
+    }),
+    new Progress<ByteProgress>(e =>
+    {
+        Console.WriteLine("TotalBytes: " + e.TotalBytes);
+        Console.WriteLine("ProgressedBytes: " + e.ProgressedBytes);
+        Console.WriteLine("Percentage: " + e.ToRatio() * 100);
+    }),
+    CancellationToken.None);
+```
+
+### Example (with Event handler)
+
+```csharp
+var launcher = new MinecraftLauncher();
+launcher.FileProgressChanged += (_, e) =>
+{
+    Console.WriteLine("Name: " + e.Name);
+    Console.WriteLine("EventType: " + e.EventType);
+    Console.WriteLine("TotalTasks: " + e.TotalTasks);
+    Console.WriteLine("ProgressedTasks: " + e.ProgressedTasks);
+};
+launcher.ByteProgressChanged += (_, e) =>
+{
+    Console.WriteLine("TotalBytes: " + e.TotalBytes);
+    Console.WriteLine("ProgressedBytes: " + e.ProgressedBytes);
+    Console.WriteLine("Percentage: " + e.ToRatio() * 100);
+};
+await launcher.InstallAsync("1.20.4", CancellationToken.None);
+```
+
+## Performance Tips
+
+`FileProgress` is called very frequently (4000 to 8000 times each time InstallAsync is called), so if you put time-consuming tasks in the event handler, it can affect the performance of your program. `ByteProgress`, on the other hand, is only called 3-4 times per second, so it's relatively less sensitive to performance.
+
+When you register an event handler, it is internally converted to a `new Progress<T>(handler)`. [Progress<T>](https://learn.microsoft.com/en-us/dotnet/api/system.progress-1?view=net-8.0) will have different behavior depending on the current SynchronizationContext. If it's a WinForm or WPF app, the handler's code will run in the UI thread, and if it's a console app, it will run in the ThreadPool.
+
+So if you use an event handler in a console app, you'll be making a lot of calls to the ThreadPool. This can have a bad impact on the performance of your application, so either don't use `FileProgress`, or implement `IProgress<T>`, which doesn't use ThreadPool. The library provides `SyncProgress<T>`, which runs the handler directly on the thread that called the event. `SyncProgress<T>` should not directly access the UI and should contain as little code as possible.
+
+```csharp
+// example
+IProgress<InstallerProgressChangedEventArgs> fileProgress = new SyncProgress<InstallerProgressChangedEventArgs>(e => 
+{ 
+    Console.WriteLine($"{e.ProgressedTasks} / {e.TotalTasks}");
+});
+```
+
+## API Reference
+
+- [MinecraftLauncher](https://cmllib.github.io/CmlLib.Core/api/CmlLib.Core.MinecraftLauncher.html)
+- [ByteProgress](https://cmllib.github.io/CmlLib.Core/api/CmlLib.Core.ByteProgress.html)
+- [InstallerProgressChangedEventArgs](https://cmllib.github.io/CmlLib.Core/api/CmlLib.Core.Installers.InstallerProgressChangedEventArgs.html)
+- [FileProgressChanged](https://cmllib.github.io/CmlLib.Core/api/CmlLib.Core.MinecraftLauncher.html#CmlLib_Core_MinecraftLauncher_FileProgressChanged)
+- [ByteProgressChanged](https://cmllib.github.io/CmlLib.Core/api/CmlLib.Core.MinecraftLauncher.html#CmlLib_Core_MinecraftLauncher_ByteProgressChanged)
+
+# Launch Options
+
+## Example
+
+```csharp
+var launchOption = new MLaunchOption 
+{
+    Session = MSession.CreateOfflineSession("gamer123"),
+    Features = new string[] { "feature_name" },
+
+    JavaPath = "javaw.exe",
+    MaximumRamMb = 4096,
+    MinimumRamMb = 1024,
+    DockName = "Minecraft",
+    DockIcon = "/path/icon.icns",
+
+    IsDemo = false,
+    ScreenWidth = 1600,
+    ScreenHeight = 900,
+    FullScreen = false,
+    QuickPlayPath = "/path/quickplay",
+    QuickPlaySingleplayer = "world name",
+    QuickPlayRealms = "realm id",
+    ServerIp = "mc.hypixel.net",
+    ServerPort = 25565,
+
+    ClientId = "clientid",
+    VersionType = "CmlLib",
+    GameLauncherName = "CmlLib",
+    GameLauncherVersion = "2",
+    UserProperties = "{}",
+
+    ArgumentDictionary = new Dictionary<string, string>
+    {
+        { "key", "value" },
+        { "auth_xuid", "12345678" }
+    },
+    JvmArgumentOverrides = new MArgument[]
+    {
+        new MArgument("--key=value")
+    },
+    ExtraJvmArguments = new MArgument[]
+    {
+        new MArgument("--key=value"),
+        MArgument.FromCommandLine("-Dminecraft.api.env=custom -Dminecraft.api.auth.host=https://invalid.invalid -Dminecraft.api.account.host=https://invalid.invalid -Dminecraft.api.session.host=https://invalid.invalid -Dminecraft.api.services.host=https://invalid.invalid"),
+    },
+    ExtraGameArguments = new MArgument[]
+    {
+        new MArgument("--key=value"),
+        new MArgument(["--key1", "--key2", "value2"]),
+    }
+};
+```
+
+### Session
+
+**Type: MSession**
+
+See [Login and Session](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/login-and-sessions/index.md) for how to log in Minecraft and get game session.
+
+Game session (Username, UUID, AccessToken, etc...). If the value is null, the default session with username `tester123` is used.
+
+### Features
+
+**Type: `IEnumerable<string>`**
+
+Enable features.
+
+### JavaPath
+
+**Type: string**
+
+Java binary path. If the value is null, `ArgumentNullException` is thrown.
+
+### MaximumRamMb
+
+**Type: int**
+
+`-Xmx` JVM parameter. It is used to set the maximum heap size of Minecraft. If the value is a negative value, `ArgumentOutOfRangeException` is thrown. The default value is 2048 (2GB) for X64, 1024 (1GB) for other platforms. *Note: You can't set this property to any number higher than 1024 when using 32bit Java.*
+
+### MinimumRamMb
+
+**Type: int**
+
+`-Xms` JVM parameter. It is used to set the minimum heap size of Minecraft. If the value is a negative value or greater than `MaximumRamMb`, `ArgumentOutOfRangeException` is thrown.
+
+### DockName
+
+**Type: string**
+
+macOS dock name of Minecraft. In some macOS versions, you must set this option. [Known Issues](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/resources/Common-Errors/index.md)
+
+### DockIcon
+
+**Type: string**
+
+macOS dock icon of minecraft. It should be an absolute file path to an image that has the dimensions `256x256` and is of the `icns` format.
+
+### IsDemo
+
+**Type: bool**
+
+Enable `is_demo_user` feature and launch a game in demo version.
+
+### ScreenWidth / ScreenHeight
+
+**Type: int**
+
+Initial window size of Minecraft. It works if the value of the two options is greater than 0. If the value of both options is 0, let the game decide the window size. If one of these options is negative, `ArgumentOutOfRangeException` will be thrown. Not all versions of Minecraft support this option.
+
+### FullScreen
+
+**Type: bool**
+
+Launch Minecraft as full screen. Not all versions of Minecraft support this option.
+
+### QuickPlayPath
+
+**Type: string**
+
+Set `QuickPlayPath` argument. [QuickPlay](https://minecraft.wiki/w/Quick_Play)
+
+### QuickPlaySingleplayer
+
+**Type: string**
+
+Set `QuickPlaySingleplayer` argument. [QuickPlay](https://minecraft.wiki/w/Quick_Play)
+
+### QuickPlayRealms
+
+**Type: string**
+
+Set `QuickPlayRealms` argument. [QuickPlay](https://minecraft.wiki/w/Quick_Play)
+
+### ServerIp / ServerPort
+
+**Type: string / int**
+
+Connecting to a server directly when Minecraft is loading is done. The default value of `ServerPort` is 25565. If `ServerPort` is not a valid port number (0-65535), `ArgumentOutOfRangeException` is thrown. If the starting version supports [QuickPlay](https://minecraft.wiki/w/Quick_Play), the launcher will enable QuickPlayMultiplayer feature, otherwise the launcher will append `--serverIp` and `--serverPort` arguments.
+
+*note1: Not all versions of Minecraft support this option.*
+
+*note2: If you set a domain with an SRV record, the connection may fail. Set the actual address and port that the SRV record points to directly.*
+
+### ClientId
+
+**Type: string**
+
+`${clientid}`
+
+### VersionType
+
+**Type: string**
+
+`${version_type}`. If the value is null, the `Type` property of the starting version is used. VersionType is displayed in the lower left corner of the main screen. Not all versions of Minecraft support this.
+
+### GameLauncherName
+
+**Type: string**
+
+`${launcher_name}`. The default value is `minecraft-launcher` , which is the same as the Mojang launcher.
+
+### GameLauncherVersion
+
+**Type: string**
+
+`${launcher_version}`. The default value is `2`, which is the same as the Mojang launcher.
+
+### UserProperties
+
+**Type: string**
+
+`${user_properties}`. for Twitch livestreaming
+
+### ArgumentDictionary
+
+**Type: `IReadOnlyDictionary<string, string>`**
+
+When building an argument in the launcher, `${variable_name}` will be replaced with the appropriate value. This option specifies `variable_name` as the key and the string to be replaced as the value.
+
+### JVMArgumentOverrides
+
+**Type: `IEnumerable<MArgument>`**
+
+Override all JVM arguments. When this option is not null, `ExtraJVMArguments` and `JVMArguments` are ignored.
+
+See [MArgument](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/margument/index.md)
+
+### ExtraJVMArguments
+
+**Type: `IEnumerable<MArgument>`**
+
+Set extra JVM arguments. See [MArgument](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/margument/index.md)
+
+Default arguments are:
+
+```text
+-XX:+UnlockExperimentalVMOptions
+-XX:+UseG1GC
+-XX:G1NewSizePercent=20
+-XX:G1ReservePercent=20
+-XX:MaxGCPauseMillis=50
+-XX:G1HeapRegionSize=16M
+```
+
+### ExtraGameArguments
+
+**Type: `IEnumerable<MArgument>`**
+
+Set extra game arguments. See [MArgument](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/margument/index.md)
+
+## API Reference
+
+- [MLaunchOption](https://cmllib.github.io/CmlLib.Core/api/CmlLib.Core.ProcessBuilder.MLaunchOption.html)
+
+# Minecraft Launcher
+
+`MinecraftLauncher` is the core class of this library. It handles finding installed versions, downloading game files, and building the game process. It acts as the main entry point for most launcher operations.
+
+## Basic Usage Steps
+
+Here is the typical flow of using `MinecraftLauncher`:
+
+### 1. Initialize
+
+First, create a `MinecraftPath` object, which represents the game directory (e.g., `%appdata%\.minecraft`). Then, initialize the `MinecraftLauncher` with this path.
+
+```csharp
+var path = new MinecraftPath();
+var launcher = new MinecraftLauncher(path);
+```
+
+You can customize the directory structure if needed. See [Minecraft Path](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/MinecraftPath/index.md) and [MinecraftLauncherParameters](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/minecraftlauncherparameters/index.md).
+
+### 2. Versions
+
+You can retrieve a list of all installed and available versions from Mojang's servers.
+
+```csharp
+var versions = await launcher.GetAllVersionsAsync();
+foreach (var v in versions)
+{
+    Console.WriteLine($"Name: {v.Name}, Type: {v.GetVersionType()}");
+}
+```
+
+See [Versions](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/versions/index.md) for more details.
+
+### 3. Install & Event Handling
+
+Before launching, you must ensure all game files (JARs, libraries, assets) are downloaded and valid. The `InstallAsync` method handles this. You can subscribe to events to monitor download progress.
+
+```csharp
+// Event Handlers
+launcher.FileProgressChanged += (sender, args) =>
+{
+    Console.WriteLine($"Name: {args.Name}");
+    Console.WriteLine($"Type: {args.EventType}");
+    Console.WriteLine($"Total: {args.TotalTasks}");
+    Console.WriteLine($"Progressed: {args.ProgressedTasks}");
+};
+launcher.ByteProgressChanged += (sender, args) =>
+{
+    Console.WriteLine($"{args.ProgressedBytes} bytes / {args.TotalBytes} bytes");
+};
+
+// Install
+await launcher.InstallAsync("1.20.4");
+```
+
+Installation Recommendation
+
+Always call `InstallAsync` before launching. It checks file integrity and only downloads missing or corrupted files, so it's efficient to call every time.
+
+See [Event Handling](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/Handling-Events/index.md).
+
+### 4. Launch
+
+Once installed, build the game process using `BuildProcessAsync`. This creates a standard .NET `Process` object configured with the correct arguments.
+
+```csharp
+var launchOption = new MLaunchOption
+{
+    MaximumRamMb = 4096,
+    Session = MSession.CreateOfflineSession("Gamer123"),
+};
+
+var process = await launcher.BuildProcessAsync("1.20.4", launchOption);
+```
+
+See [Launch Options](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/MLaunchOption/index.md).
+
+### 5. Process Management
+
+You can use the helper class `ProcessWrapper` to easily handle game output and exit events.
+
+```csharp
+var processWrapper = new ProcessWrapper(process);
+processWrapper.OutputReceived += (s, e) => Console.WriteLine($"[Game] {e}");
+processWrapper.StartWithEvents();
+var exitCode = await processWrapper.WaitForExitTaskAsync();
+Console.WriteLine($"Exited with code {exitCode}");
+```
+
+See [ProcessWrapper](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/utilities/processwrapper/index.md).
+
+______________________________________________________________________
+
+## Full Example
+
+Here is the complete code combining all the steps above.
+
+```csharp
+using System;
+using CmlLib.Core;
+using CmlLib.Core.Auth;
+using CmlLib.Core.ProcessBuilder;
+
+// 1. Initialize
+var path = new MinecraftPath(); 
+var launcher = new MinecraftLauncher(path);
+
+Console.WriteLine($"Initialized launcher at: {path.BasePath}");
+
+// 2. List versions
+
+var versions = await launcher.GetAllVersionsAsync();
+foreach (var v in versions)
+{
+    Console.WriteLine($"Name: {v.Name}, Type: {v.GetVersionType()}");
+}
+var selectedVersion = "1.21.6";
+
+// 3. Add event handlers and Install
+launcher.FileProgressChanged += (sender, args) =>
+{
+    Console.WriteLine($"Name: {args.Name}");
+    Console.WriteLine($"Type: {args.EventType}");
+    Console.WriteLine($"Total: {args.TotalTasks}");
+    Console.WriteLine($"Progressed: {args.ProgressedTasks}");
+};
+launcher.ByteProgressChanged += (sender, args) =>
+{
+    Console.WriteLine($"{args.ProgressedBytes} bytes / {args.TotalBytes} bytes");
+};
+
+await launcher.InstallAsync(selectedVersion);
+
+// 4. Build Process
+var launchOption = new MLaunchOption
+{
+    MaximumRamMb = 4096,
+    Session = MSession.CreateOfflineSession("DevUser"),
+};
+
+var process = await launcher.BuildProcessAsync(selectedVersion, launchOption);
+
+// 5. Launch & Monitor
+var processWrapper = new ProcessWrapper(process);
+
+processWrapper.OutputReceived += (sender, log) => 
+    Console.WriteLine($"[Game] {log}");
+
+processWrapper.StartWithEvents();
+var exitCode = await processWrapper.WaitForExitTaskAsync();
+Console.WriteLine($"Game exited with code: {exitCode}");
+```
+
+.NET Framework Optimization
+
+If you are using **.NET Framework**, set the `DefaultConnectionLimit` at the **start of your application** (before initializing `MinecraftLauncher`) to maximize download speed. This is not necessary in .NET Core or .NET 5+.
+
+```csharp
+System.Net.ServicePointManager.DefaultConnectionLimit = 256;
+```
+
+## More Methods
+
+### Extract Files
+
+```csharp
+// by version name
+IEnumerable<GameFile> files = await launcher.ExtractFiles("1.20.4", cancellationToken);
+```
+
+```csharp
+// by IVersion 
+IVersion version = await launcher.GetVersionAsync("1.20.4", cancellationToken);
+IEnumerable<GameFile> files = await launcher.ExtractFiles(version, cancellationToken);
+```
+
+### Install Files
+
+```csharp
+// report install progress to launcher.FileProgressChanged, launcher.ByteProgressChanged
+await launcher.InstallAsync("1.20.4", cancellationToken); // by version name
+await launcher.InstallAsync(version, cancellationToken); // by IVersion 
+
+// report install progress to fileProgress, byteProgress
+await launcher.InstallAsync("1.20.4", fileProgress, byteProgress, cancellationToken); // by version name 
+await launcher.InstallAsync(version, fileProgress, byteProgress, cancellationToken); // by IVersion
+```
+
+### Build game process
+
+```csharp
+// by version name
+Process process = await launcher.BuildProcessAsync("1.20.4", new MLaunchOption(), cancellationToken);
+```
+
+```csharp
+// by IVersion
+IVersion version = await launcher.GetVersionAsync("1.20.4", cancellationToken);
+Process process = launcher.BuildProcess(version, new MLaunchOption());
+```
+
+### Get Java Path
+
+```csharp
+IVersion version = await launcher.GetVersionAsync("1.20.4", cancellationToken);
+string? javaPath = await launcher.GetJavaPath(version);
+```
+
+Get the path to the first installed Java
+
+```csharp
+string? javaPath = await launcher.GetDefaultJavaPath();
+```
+
+## API References
+
+- <https://cmllib.github.io/CmlLib.Core/api/CmlLib.Core.MinecraftLauncher.html>
+
+# Minecraft Path
+
+You can customize Minecraft game directory path and structure where all game files is stored.
+
+## Example
+
+Initialize `MinecraftLauncher` with custom Minecraft path and default directory structure.
+
+```csharp
+// initialize launcher with the specific path
+MinecraftPath myPath = new MinecraftPath("./games");
+MinecraftLauncher launcher = new MinecraftLauncher(myPath);
+
+// myPath.BasePath : ./games
+// myPath.Library : ./games/libraries
+// myPath.Resource : ./games/resources
+// myPath.Versions : ./games/versions
+// myPath.GetVersionJarPath("1.16.5") : ./games/versions/1.16.5/1.16.5.jar
+// myPath.GetIndexFilePath("1.16.5") : ./games/assets/indexes/1.16.5.json
+```
+
+## Default directory path
+
+You can get default game directory path using `MinecraftPath.GetOSDefaultPath()`, or create new instance of `MinecraftPath` without any arguments.
+
+Default Minecraft path is:
+
+- Windows: `%appdata%\.minecraft`
+- Linux: `$HOME/.minecraft`
+- macOS: `$HOME/Library/Application Support/minecraft`
+
+## Default directory structure
+
+```text
+/ (MinecraftPath.BasePath)
+├── assets/ (MinecraftPath.Assets)
+│   ├── indexes/
+│   │   └── {asset_id}.json (MinecraftPath.GetIndexFilePath(assetId))
+│   ├── objects/ (MinecraftPath.GetAssetObjectPath(assetId))
+│   └── virtual/
+│       └── legacy/ (MinecraftPath.GetAssetLegacyPath(assetId))
+├── libraries/ (MinecraftPath.Library)
+├── resources/ (MinecraftPath.Resource)
+├── runtime/ (MinecraftPath.Runtime)
+└── versions/ (MinecraftPath.Versions)
+    └── {version_name}/
+        ├── {version_name}.jar (MinecraftPath.GetVersionJarPath("version_name"))
+        ├── {version_name}.json (MinecraftPath.GetVersionJsonPath("version_name"))
+        └── natives/ (MinecraftPath.GetNativePath("version_name"))
+```
+
+## Make custom directory structure
+
+There are two ways to make custom directory structure.
+
+### Set properties
+
+Set path properties to what you want. See [API Reference](#api-references) for more information.
+
+Information
+
+Make sure to use absolute paths only.
+
+```csharp
+MinecraftPath myPath = new MinecraftPath();
+myPath.Libraries = myPath.BasePath + "/commons/libs";
+myPath.Versions = myPath.BasePath + "/commons/versions";
+myPath.Assets = MinecraftPath.GetOSDefaultPath() + "/assets";
+```
+
+### Inheritence
+
+Information
+
+When receiving a relative path as an argument, make sure to convert it to an absolute path and store it.
+
+Create derived class of `MinecraftPath`, and override methods. Each methods (`CreateDirs`, `NormalizePath`, etc) are described in [API Reference](#api-references).
+
+```csharp
+class MyMinecraftPath : MinecraftPath
+{
+    public MyMinecraftPath(string p)
+    {
+        BasePath = NormalizePath(p);
+
+        Library = NormalizePath(BasePath + "/libs");
+        Versions = NormalizePath(BasePath + "/vers");
+        Resource = NormalizePath(BasePath + "/resources");
+
+        Runtime = NormalizePath(BasePath + "/java");
+        Assets = NormalizePath(BasePath + "/assets");
+
+        CreateDirs();
+    }
+
+    public override string GetVersionJarPath(string id)
+        => NormalizePath($"{Versions}/{id}/{id}.jar");
+
+    public override string GetVersionJsonPath(string id)
+        => NormalizePath($"{Versions}/{id}/{id}.json");
+
+    public override string GetNativePath(string id)
+        => NormalizePath($"{Versions}/{id}/natives");
+
+    // NOTE: Minecraft may not recognize the changed path
+    public override string GetIndexFilePath(string assetId)
+        => NormalizePath($"{Assets}/indexes/{assetId}.json");
+
+    // NOTE: Minecraft may not recognize the changed path
+    public override string GetAssetObjectPath(string assetId)
+        => NormalizePath($"{Assets}/objects");
+
+    // NOTE: Minecraft may not recognize the changed path
+    public override string GetAssetLegacyPath(string assetId)
+        => NormalizePath($"{Assets}/virtual/legacy");
+
+    // NOTE: Minecraft may not recognize the changed path
+    public override string GetLogConfigFilePath(string configId)
+        => NormalizePath($"{Assets}/log_configs/{configId}" + (!configId.EndsWith(".xml") ? ".xml" : ""));
+}
+```
+
+# API Reference
+
+- [MinecraftPath](https://cmllib.github.io/CmlLib.Core.Commons/api/CmlLib.Core.MinecraftPath.html)
+
+# Versions
+
+### Example: Print all versions
+
+The `GetAllVersionsAsync` method returns all vanilla and locally installed versions of Minecraft.
+
+```csharp
+var launcher = new MinecraftLauncher();
+VersionMetadataCollection versions = await launcher.GetAllVersionsAsync();
+foreach (IVersionMetadata version in versions)
+{
+    Console.WriteLine("Name: " + version.Name);
+    Console.WriteLine("Type: " + version.GetVersionType());
+    Console.WriteLine("ReleaseTime: " + version.ReleaseTime);
+}
+```
+
+### Example: Get specific version
+
+`GetVersionAsync` method load and parse version json file.
+
+```csharp
+var launcher = new MinecraftLauncher();
+IVersion version = await launcher.GetVersionAsync("1.20.4");
+// version.Id
+// version.Jar
+// version.Libraries
+// etc...
+```
+
+### Example: Manipulate version
+
+`IVersion` is designed to be an immutable type. With `.ToMutableVersion(),` you can convert any version to a mutable version, so that you can change the version data.
+
+In version 1.16.5, the Multiplayer button is disabled when launch the game with an offline session. This can be fixed by using a modified `authlib` library. ([#85](https://github.com/CmlLib/CmlLib.Core/issues/85))
+
+```csharp
+var launcher = new MinecraftLauncher();
+MinecraftVersion version = (await launcher.GetVersionAsync("1.16.5")).ToMutableVersion();
+
+// remove existing authlib
+version.LibraryList.RemoveAt(version.LibraryList.FindIndex(lib => lib.Name == "com.mojang:authlib:2.1.28"));
+
+// add modified authlib
+// download authlib-2.1.28-workaround.jar file and place it in <game_directory>/libraries/com/mojang/authlib/2.1.28/authlib-2.1.28-workaround.jar
+version.LibraryList.Add(new MLibrary("com.mojang:authlib:2.1.28")
+{
+    Artifact = new CmlLib.Core.Files.MFileMetadata
+    {
+        Path = "com/mojang/authlib/2.1.28/authlib-2.1.28-workaround.jar",
+        Sha1 = "", // (optional) SHA1 checksum of the library
+        Url = "" // (optional) URL to download library if file does not exist or checksum is not equal
+    }
+});
+
+await launcher.InstallAsync(version);
+var process = launcher.BuildProcess(version, new MLaunchOption
+{
+    Session = MSession.CreateOfflineSession("tester123")
+});
+process.Start();
+```
+
+## API Reference
+
+- [IVersion](https://cmllib.github.io/CmlLib.Core/api/CmlLib.Core.Version.IVersion.html)
+- [VersionMetadataCollection](https://cmllib.github.io/CmlLib.Core/api/CmlLib.Core.VersionMetadata.VersionMetadataCollection.html)
+- [IVersionMetadata](https://cmllib.github.io/CmlLib.Core/api/CmlLib.Core.VersionMetadata.IVersionMetadata.html)
+- [MVersionType](https://cmllib.github.io/CmlLib.Core/api/CmlLib.Core.VersionMetadata.MVersionType.html)
+
+# Mod Loader Installers
+
+Automatically install mod loaders like Forge, Fabric without requiring users to manually install them.
+
+## Automatic Mod Loader Installation
+
+- Forge: [Installer.Forge](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.forge/index.md)
+- Fabric: [Fabric Installer](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/installer/fabric-installer/index.md)
+- Quilt: [Quilt Installer](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/installer/quilt-installer/index.md)
+- LiteLoader: [LiteLoader Installer](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/installer/liteloader-installer/index.md)
+
+## Community Projects
+
+Thanks to community contributions, there are installers that can be used with CmlLib.Core. These libraries are not official projects managed by CmlLib.
+
+- Optifine: [mzggr0914/Optifine.Installer](https://github.com/mzggr0914/Optifine.Installer)
+- NeoForge: [CmlLib.Core.Installer.NeoForge](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.neoforge/index.md)
+
+## Direct Mod Loader Extraction
+
+If the mod loader you want to install is not in the above list or if there are unsupported versions, you can extract files directly and install them.
+
+See [Mod Loader File Extraction](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/installer/extract-files/index.md)
+
+Distribute the extracted files with your launcher. A commonly used method is to upload extracted files to your own file server, and have the launcher download files from the server and copy them to the appropriate path.
+
+# Mod Loader File Extraction
+
+You can extract files from any type of client including Forge, Fabric, and automate installation.
+
+Copyright Warning
+
+**Extracted files may contain copyrighted content. Distributing these files may violate Minecraft EULA or related laws. Please verify before distribution.**
+
+## Extraction Method
+
+1. Delete `.minecraft` directory
+1. Launch vanilla version of the version you want to extract using Mojang launcher and exit (e.g., to extract 1.7.10 forge, first run vanilla 1.7.10)
+1. Install the mod loader in `.minecraft`
+1. Launch the installed mod loader using Mojang launcher and exit
+1. Copy `libraries` directory and `versions/<version name>` directory from `.minecraft`. These two directories are the extracted files.
+
+Example: 1.21.4-forge-54.1.0
+
+```text
+/
+├── libraries/
+│   ├── org/
+│   ├── net/
+│   └── ...
+└── versions/
+    └── 1.21.4-forge-54.1.0/
+        └── 1.21.4-forge-54.1.0.json
+```
+
+JAR File Warning
+
+If `versions/<version name>/<version name>.jar` file exists, **please verify before distribution!**
+
+- In most cases, CmlLib will install this file from Mojang's official distribution server even if it's missing.
+- If distribution is necessary, **verify that you are not violating Minecraft EULA or copyright laws.**
+
+## Distribution and Installation
+
+Distribute the extracted files with your launcher. There are several distribution methods:
+
+- Upload extracted files to your own file server
+- Embed extracted files into launcher executable using EmbeddedResource
+
+Implement code to copy or download distributed files to the game directory for installation.
+
+## Launching
+
+After loading versions, the installed version names will be displayed. Launch the game using the version name. See [Minecraft Launcher](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/MinecraftLauncher/index.md)
+
+```csharp
+var versions = await launcher.GetAllVersionsAsync();
+foreach (var v in versions)
+{
+    Console.WriteLine(v.Name);
+}
+
+// Example: when installed version is 1.21.4-forge-54.1.0
+
+await launcher.InstallAsync("1.21.4-forge-54.1.0");
+var process = await launcher.BuildProcessAsync("1.21.4-forge-54.1.0", new MLaunchOption
+{
+    Session = MSession.CreateOfflineSession("Gamer123"),
+    MaximumRamMb = 4096
+});
+process.Start();
+```
+
+Since extracted files are usually incomplete, always call `InstallAsync` to ensure all missing files are installed.
+
+# Fabric Installer
+
+### Get Minecraft versions
+
+```csharp
+var fabricInstaller = new FabricInstaller(new HttpClient());
+var versions = await fabricInstaller.GetSupportedVersionNames();
+
+foreach (var version in versions)
+{
+    Console.WriteLine(version);
+}
+```
+
+### Get Fabric versions
+
+```csharp
+var fabricInstaller = new FabricInstaller(new HttpClient());
+var versions = await fabricInstaller.GetLoaders("1.20.6");
+
+foreach (var version in versions)
+{
+    Console.WriteLine(version.Version);
+}
+```
+
+### Install
+
+```csharp
+var path = new MinecraftPath();
+var launcher = new MinecraftLauncher(path);
+
+var fabricInstaller = new FabricInstaller(new HttpClient());
+
+// install the latest fabric loader for 1.20.4
+var versionName = await fabricInstaller.Install("1.20.4", path);
+
+// install the specific fabric loader
+var versionName = await fabricInstaller.Install("1.20.4", "0.16.0", path);
+```
+
+# Forge Installer
+
+Use the [Installer.Forge](https://cmllib.github.io/CmlLib.Core-wiki/en/installer.forge/index.md) library.
+
+To extract files directly, see [Mod Loader File Extraction](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/installer/extract-files/index.md).
+
+# LiteLoader Installer
+
+## Get all versions
+
+```csharp
+var liteLoaderInstaller = new LiteLoaderInstaller(new HttpClient());
+var loaders = await liteLoaderInstaller.GetAllLiteLoaders();
+
+foreach (var loader in loaders)
+{
+    Console.WriteLine($"GameVersion: {loader.BaseVersion}, LoaderVersion: {loader.Version}");
+}
+```
+
+### Install (1.7.10)
+
+```csharp
+var path = new MinecraftPath();
+var launcher = new MinecraftLauncher(path);
+var version = "1.7.10";
+
+var liteLoaderInstaller = new LiteLoaderInstaller(new HttpClient());
+var loaders = await liteLoaderInstaller.GetAllLiteLoaders();
+var loaderToInstall = loaders.First(loader => loader.BaseVersion == version);
+
+var installedVersion = await liteLoaderInstaller.Install(
+    loaderToInstall, 
+    await launcher.GetVersionAsync(version), 
+    path);
+```
+
+# Quilt Installer
+
+## Get Minecraft versions
+
+```csharp
+var quiltInstaller = new QuiltInstaller(new HttpClient());
+var versions = await quiltInstaller.GetSupportedVersionNames();
+
+foreach (var version in versions)
+{
+    Console.WriteLine(version);
+}
+```
+
+### Get Quilt versions
+
+```csharp
+var quiltInstaller = new QuiltInstaller(new HttpClient());
+var versions = await quiltInstaller.GetLoaders("1.20.6");
+
+foreach (var version in versions)
+{
+    Console.WriteLine(version.Version);
+}
+```
+
+### Installation
+
+```csharp
+var path = new MinecraftPath();
+var launcher = new MinecraftLauncher(path);
+
+var quiltInstaller = new QuiltInstaller(new HttpClient());
+
+// install the latest quilt loader for 1.20.4
+var versionName = await quiltInstaller.Install("1.20.4", path);
+
+// install the specific quilt loader
+var versionName = await quiltInstaller.Install("1.20.4", "0.16.0", path);
+```
+
+# Login and Sessions
+
+To connect to online-mode server, you should obtain player's session data. The game session data contains player's username, UUID, and accessToken.
+
+There are some ways to obtain game session:
+
+- [Microsoft Xbox Account](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/login-and-sessions/Microsoft-Xbox-Live-Login/index.md)
+- [Offline Account](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/login-and-sessions/offline-account/index.md)
+
+After obtaining a session data, you should set the `MLaunchOption.Session` property to an `MSession` instance. [Launch Options](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/MLaunchOption/index.md)
+
+# API Reference
+
+- [MSession](https://cmllib.github.io/CmlLib.Core.Commons/api/CmlLib.Core.Auth.MSession.html)
+
+# Microsoft Xbox Account
+
+## [CmlLib.Core.Auth.Microsoft](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/index.md)
+
+Microsoft login process is quite complex. Therefore, this functionality is provided as a separate library. Use this library.
+
+[CmlLib.Core.Auth.Microsoft](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/index.md)
+
+### **Example**
+
+```csharp
+using CmlLib.Core;
+using CmlLib.Core.ProcessBuilder;
+using CmlLib.Core.Auth.Microsoft;
+
+var loginHandler = JELoginHandlerBuilder.BuildDefault();
+var session = await loginHandler.Authenticate();
+
+var launcher = new MinecraftLauncher();
+var process = await launcher.InstallAndBuildProcessAsync("1.20.4", new MLaunchOption
+{
+    Session = session
+});
+process.Start();
+```
+
+# Offline Account
+
+## Offline Login
+
+This session cannot be used in online-mode server or realm.
+
+```csharp
+using CmlLib.Core.Auth;
+
+MSession session = MSession.CreateOfflineSession("username");
+```
+
+## Creating your own session data
+
+```csharp
+using CmlLib.Core.Auth;
+
+MSession session = new MSession("username", "accesstoken", "uuid");
+```
+
+# More APIs
+
+# GameInstaller
+
+`IGameInstaller` checks for the existence and integrity of the file and downloads it if necessary.
+
+The GameInstaller fires events that indicate the progress of the installation. See [Event Handling](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/Handling-Events/index.md)
+
+### Example
+
+```csharp
+var installer = ParallelGameInstaller.CreateAsCoreCount(new HttpClient());
+var file = new GameFile("name")
+{
+    Path = "absolute path of the file",
+    Hash = "SHA1 checksum, in hex string",
+    Size = 1024, // file size
+    Url = "URL to download the file",
+};
+await installer.Install([file], fileProgress, byteProgress, CancellationToken.None);
+```
+
+### BasicGameInstaller
+
+Single-threaded installer
+
+```csharp
+var installer = new BasicGameInstaller(new HttpClient());
+```
+
+### ParallelGameInstaller
+
+Multi-threaded installer. `CreateAsCoreCount` method initializes a new `ParallelGameInstaller` with the number of cores of the current PC.
+
+```csharp
+var installer = ParallelGameInstaller.CreateAsCoreCount(new HttpClient());
+```
+
+You can specify the maximum number of concurrences for each task:
+
+```csharp
+var installer = new ParallelGameInstaller(
+    maxChecker: 4,
+    maxDownloader: 8,
+    boundedCapacity: 2048, // download queue size
+    new HttpClient());
+```
+
+# FileExtractor
+
+`IFileExtractor` extracts all `GameFile` from a given version.
+
+The library provides five built-in extractors:
+
+- AssetFileExtractor: extract asset files (`<game_directory>/assets/objects`)
+- ClientFileExtractor: extract version.jar file (`<game_directory>/versions/<version>/<version>.jar`)
+- JavaFileExtractor: extract java files (`<game_directory>/runtime`)
+- LibraryFileExtractor: extract library files (`<game_directory>/libraries`)
+- LogFileExtractor: extract log config file (`<game_directory>/assets/log_configs`)
+
+Any `GameFile` generated here is passed to [GameInstaller](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/Downloader/index.md), which would download a file if the file does not exist or its checksum is not equal.
+
+Implement the `IFileExtractor` interface and add it to the launcher if you want the launcher to check and download more files (e.g. mod files). See [MinecraftLauncherParameters](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/minecraftlauncherparameters/index.md)
+
+# Java
+
+### IJavaPathResolver
+
+`IJavaPathResolver` returns a list of installed Java versions and returns the path to the binary file for the given Java version.
+
+The built-in `IJavaPathResolver` implementation, `MinecraftJavaPathResolver`, manages the Java versions within the `MinecraftPath.Runtime` directory.
+
+You can set the `IJavaPathResolver` in [MinecraftLauncherParameters](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/minecraftlauncherparameters/index.md)
+
+### JavaFileExtractor
+
+The library installs the Java provided by Mojang, so you don't need to have Java pre-installed on the user's PC. See `JavaFileExtractor` in [FileExtractor](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/FileChecker/index.md).
+
+Platform Support
+
+`JavaFileExtractor` does not support all platforms. On unsupported platform you should specify Java binary path yourself. See `JavaPath` in [Launch Options](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/MLaunchOption/index.md).
+
+Supported platform:
+
+- windows-x64
+- windows-x86
+- windows-arm64
+- linux (x64)
+- linux-i386 (x86)
+- mac-os (x64)
+- mac-os-arm64
+
+# MArgument
+
+Various parameters set in the launcher (user information, game directory path, server address, etc.) are passed as an argument list when the game process is executed. The operating system passes this list to the process, separated by spaces.
+
+Each argument string can have the following characteristics:
+
+- It can have a key and value separated by `=` like `-key=value`, or a single value like `value`.
+- It can contain `${template}` format that the launcher will replace with appropriate values, like `--key=${template}`.
+- If `value` contains spaces, it is enclosed in quotes. (e.g., `--key="hello world"`, `"this value"`)
+
+Argument Separation
+
+Arguments are basically separated by spaces, but spaces enclosed in quotes do not separate arguments.
+
+- `--username ${auth_player_name}`: These are **two arguments**: `--username` and `${auth_player_name}`.
+- `-Dminecraft.launcher.brand="hello world"`: This is **one argument** even though it contains spaces, because it's enclosed in quotes.
+
+`MArgument` is a type that manages a list of such arguments. When initializing `MArgument`, each element must contain **only one argument**.
+
+```csharp
+// MArgument takes multiple individual arguments to create a list
+var arguments = new MArgument(["--username", "${auth_player_name}", "-Dminecraft.launcher.brand=${launcher_name}"]);
+
+var result = arguments.InterpolateValues(new Dictionary<string, string?>
+{
+    ["auth_player_name"] = "hello1234",
+    ["launcher_name"] = "my launcher",
+});
+// result: "--username", "hello1234", "-Dminecraft.launcher.brand=\"my launcher\""
+```
+
+**Template Substitution**
+
+CmlLib automatically substitutes `${template}` parts with actual values by calling the `InterpolateValues` method. If the substituted value contains spaces, it automatically adds quotes, so no additional processing is needed.
+
+The following templates are provided by default. To register more templates, set the `ArgumentDictionary` in the launch options. See [MLaunchOption.md](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/MLaunchOption/index.md)
+
+| Template Key            | Description                                                                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `library_directory`     | `launchOption.Path.Library`                                                                                                          |
+| `natives_directory`     | `launchOption.NativesDirectory`                                                                                                      |
+| `launcher_name`         | `launchOption.GameLauncherName`                                                                                                      |
+| `launcher_version`      | `launchOption.GameLauncherVersion`                                                                                                   |
+| `classpath_separator`   | Path separator (e.g., `;` or `:`)                                                                                                    |
+| `classpath`             | `-cp`                                                                                                                                |
+| `auth_player_name`      | Username (`launchOption.Session.Username`)                                                                                           |
+| `version_name`          | Name of the version being launched                                                                                                   |
+| `game_directory`        | Game directory path (`launchOption.Path.BasePath`)                                                                                   |
+| `assets_root`           | Assets directory path (`launchOption.Path.Assets`)                                                                                   |
+| `assets_index_name`     | Asset version name                                                                                                                   |
+| `auth_uuid`             | User UUID (`launchOption.Session.UUID`)                                                                                              |
+| `auth_access_token`     | User access token (`launchOption.Session.AccessToken`)                                                                               |
+| `user_properties`       | `launchOption.UserProperties`                                                                                                        |
+| `auth_xuid`             | User XUID (`launchOption.Session.Xuid`)                                                                                              |
+| `clientid`              | `launchOption.ClientId`                                                                                                              |
+| `user_type`             | User type, `Mojang` for pre-migration Mojang accounts, `msa` for post-migration Microsoft accounts (`launchOption.Session.UserType`) |
+| `game_assets`           | Legacy asset directory path (`launchOption.Path.GetAssetLegacyPath`)                                                                 |
+| `auth_session`          | User access token (`launchOption.Session.AccessToken`)                                                                               |
+| `version_type`          | `launchOption.VersionType`                                                                                                           |
+| `resolution_width`      | `launchOption.ScreenWidth`                                                                                                           |
+| `resolution_height`     | `launchOption.ScreenHeight`                                                                                                          |
+| `quickPlayPath`         | `launchOption.QuickPlayPath`                                                                                                         |
+| `quickPlaySingleplayer` | `launchOption.QuickPlaySingleplayer`                                                                                                 |
+| `quickPlayMultiplayer`  | `launchOption.ServerIp, launchOption.ServerPort`                                                                                     |
+| `quickPlayRealms`       | `launchOption.QuickPlayRealms`                                                                                                       |
+
+**Conditional Arguments (Rules)**
+
+`MArgument` can have `Rules` to activate arguments only in specific environments. For example, the `-XstartOnFirstThread` argument has `Rules` set to only be added on macOS.
+
+**Parsing Argument List from Single String**
+
+`MArgument` must contain only one argument. If you input multiple arguments at once, it won't work properly.
+
+```csharp
+// Wrong usage!
+var arguments = new MArgument("--username ${auth_player_name} -Dminecraft.launcher.brand=${launcher_name}");
+```
+
+Simply splitting a string by space characters (`string.Split(' ')`) cannot properly handle spaces enclosed in quotes.
+
+```csharp
+// Wrong method: using Split
+var argumentsStr = "-Dos.name=\"Windows 10\" -version 1.0";
+var splitArgs = argumentsStr.Split(' ');
+// Wrong result: "-Dos.name=\"Windows", "10\"", "-version", "1.0"
+```
+
+In such cases, you should use the `FromCommandLine` method. This method parses strings according to command line rules and creates an `MArgument` object.
+
+```csharp
+// Correct method: using FromCommandLine
+var argumentsStr = "-Dos.name=\"Windows 10\" --username \"hello 1234\"";
+var arguments = MArgument.FromCommandLine(argumentsStr);
+// Correct result: "-Dos.name=\"Windows 10\"", "--username", "hello 1234"
+```
+
+# MinecraftLauncherParameters
+
+You can change the default behavior of the launcher.
+
+### Example
+
+```csharp
+var path = new MinecraftPath();
+var parameters = MinecraftLauncherParameters.CreateDefault(path);
+
+// set default RulesEvaluator
+parameters.RulesEvaluator = new RulesEvaluator();
+
+// load only the locally installed version 
+parameters.VersionLoader = new LocalJsonVersionLoader(path);
+
+// set default JavaPathResolver
+parameters.JavaPathResolver = new MinecraftJavaPathResolver(path);
+
+// use single-threaded game installer
+parameters.GameInstaller = new BasicGameInstaller(parameters.HttpClient);
+
+// modify default file extractors
+var extractors = DefaultFileExtractors.CreateDefault(
+    parameters.HttpClient, 
+    parameters.RulesEvaluator!, 
+    parameters.JavaPathResolver!);
+extractors.Asset!.AssetServer = MojangServer.ResourceDownload; // set asset download server
+extractors.Library!.LibraryServer = MojangServer.Library; // set library download server
+extractors.Java = null; // remove JavaFileExtractor
+extractors.ExtraExtractors = []; // add additional file extractor
+parameters.FileExtractors = extractors.ToExtractorCollection();
+
+// initialize a new launcher with parameters
+var launcher = new MinecraftLauncher(parameters);
+```
+
+### MinecraftPath
+
+See [Minecraft Path](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/MinecraftPath/index.md)
+
+```csharp
+var path = new MinecraftPath();
+var parameters = MinecraftLauncherParameters.CreateDefault(path);
+```
+
+### HttpClient
+
+All HTTP requests use this HttpClient. You can use [Polly](https://github.com/App-vNext/Polly) for features like automatic retries on failed requests and failed downloads.
+
+```csharp
+var path = new MinecraftPath();
+var httpClient = new HttpClient();
+var parameters = MinecraftLauncherParameters.CreateDefault(path, httpClient);
+```
+
+### RulesEvaluator
+
+See [Rules](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/rules/index.md)
+
+```csharp
+parameters.RulesEvaluator = new RulesEvaluator();
+```
+
+### VersionLoader
+
+See [Versions](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/versions/index.md)
+
+```csharp
+parameters.VersionLoader = new MojangJsonVersionLoaderV2(path, httpClient);
+```
+
+### JavaPathResolver
+
+See [Java](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/java/index.md)
+
+```csharp
+parameters.JavaPathResolver = new MinecraftJavaPathResolver(path);
+```
+
+### GameInstaller
+
+See [GameInstaller](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/Downloader/index.md)
+
+```csharp
+parameters.GameInstaller = ParallelGameInstaller.CreateAsCoreCount(httpClient);
+```
+
+### FileExtractors
+
+See [FileExtractor](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/FileChecker/index.md)
+
+```csharp
+var extractors = DefaultFileExtractors.CreateDefault(
+    httpClient, 
+    parameters.RulesEvaluator, 
+    parameters.JavaPathResolver);
+parameters.FileExtractors = extractors.ToExtractorCollection();
+```
+
+# Rules
+
+## RulesEvaluator
+
+The `IRulesEvaluator` interface evaluates the given rules to determine whether a file or parameter should be used. Some parameters or files are only applicable in specific OS versions or when certain features are enabled.
+
+### Examples
+
+- **OS-specific files**: `lwjgl-windows` is only enabled on Windows.
+- **Feature-specific parameters**: The `--demo` parameter is only used if the `is_demo_user` feature is enabled.
+
+Game versions provide a `rules` property to specify in which environments particular features should be enabled.
+
+### Built-in Implementation
+
+The built-in implementation of `IRulesEvaluator`, named `RulesEvaluator`, behaves identically to the Mojang Launcher's implementation. In most cases, this implementation is sufficient.
+
+If you need custom behavior, you can implement your own `IRulesEvaluator`. You can set your `IRulesEvaluator` in [MinecraftLauncherParameters](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/more-apis/minecraftlauncherparameters/index.md).
+
+## RulesEvaluatorContext
+
+`RulesEvaluatorContext` represents the current environment information for evaluating the given rules. This includes the OS type, version, architecture, and list of enabled features currently running.
+
+The code below creates a `RulesEvaluatorContext` that represents the current environment.
+
+```csharp
+var context = new RulesEvaluatorContext(LauncherOSRule.Current, []);
+```
+
+If you want to simulate running in a different environment, you can initialize the `RulesEvaluatorContext` by yourself.
+
+```csharp
+var context = new RulesEvaluatorContext(new LauncherOSRule("windows", "64", "10.0"), []);
+```
+
+You can set the value of `RulesContext` for the launcher.
+
+```csharp
+var launcher = new MinecraftLauncher();
+launcher.RulesContext = new RulesEvaluatorContext(new LauncherOSRule("windows", "64", "10.0"), []);
+```
+
+# Resources
+
+# Known Issues
+
+### Can't load some texture in loading screen when using `ServerIP` option
+
+- [[BUG] When i provide server ip and port for auto connect to server on startup, the background does not load in 1.16.5 OptiFine](https://github.com/CmlLib/CmlLib.Core/issues/93)
+- Game crashed with texture related error message in 'Connecting...' loading screen.
+
+Unfortunately, These bugs are Minecraft's bug. We can't fix.
+
+### Disabled Multiplayer button, Not authenticated with Minecraft.net
+
+Your xbox account would block multiplay feature. Check your account settings. [More Informations](https://support.xbox.com/ko-KR/help/family-online-safety/online-safety/manage-a-members-safety-settings-to-access-minecraft-features)
+
+### Disabled Multiplayer button with Offline session in 1.16.4 and 1.16.5
+
+<https://github.com/CmlLib/CmlLib.Core/issues/85>
+
+### Cannot find version `<version_name>`
+
+Make sure that Mojang launcher can find your version and launch your version without any problem. CmlLib.Core will not able to find or launch the version which Mojang launcher can't.
+
+If this exception throws even target version is in versions directory (default: `<Your Minecraft Path>/versions`), check version directory name, version json file file, and `id` property is all same.\
+For example, assume you want to launch your own version named `myversion`. your version json file should be in `versions/myversion/myversion.json` and the `id` property of `myversion.json` should be `myversion`. so directory name `myversion` and the json file name `myversion.json` and the value of `id` property `myversion` is all same.
+
+If the launcher still throw this exception, call `launcher.GetAllVersionsAsync()` method before `launcher.BuildProcess`.\
+If you add new version into the version directory after the launcher is initialized, you should update version list through `GetAllVersionsAsync()` method.
+
+### Could not create Java Virtual Machine
+
+In a 32-bit JVM, There is limit on `MaximumRamMb`.\
+Recommended value of `MaximumRamMb` on 32-bit JVM is `1024`.\
+[More information](https://stackoverflow.com/questions/1434779/maximum-java-heap-size-of-a-32-bit-jvm-on-a-64-bit-os/7019624#7019624)
+
+### Error: could not open jvm.cfg
+
+Reinstall Java.\
+if your launcher uses `MJava` or `JavaChecker`, Remove the runtime directory (default: `<Your Minecraft Path>/runtime`) and install java again.
+
+### SRV Record and `ServerIP`
+
+Some version of Minecraft cannot connect to server which has a SRV record when you use direct server connection feature (MLaunchOption.ServerIP).
+
+### Can't access the Minecraft window (macOS)
+
+You have to set DockName and DockIcon in LaunchOption. If DockName is empty, you can't click or access the Minecraft window.
+
+Example:
+
+```csharp
+var launchOption = new MLaunchOption
+{
+    MaximumRamMb = 1024,
+    Session = session, 
+    DockName = "Minecraft"
+};
+```
+
+On macOS Catalina, Minecraft works normally without the above options. Old macOS versions don't work well.
+
+### Java runtime error with OpenJDK 11 (macOS)
+
+Old Minecraft versions don't support OpenJDK 11.
+
+### Java runtime error with OpenJDK 11 (Linux)
+
+Use Java 8. Old Minecraft versions don't support OpenJDK 11.
+
+To install Java 8, type the following lines in terminal:
+
+```text
+sudo apt-get update
+sudo apt-get install openjdk-8-jre
+```
+
+To make sure it worked, type `java -version`. It should return `java version "1.8.0_~~~"`.
+
+# FAQ
+
+## Get game outputs (logs)
+
+You can read standard output of game process. As `CreateProcess` method returns `Process` instance, you can use all APIs of `Process`. ([reference](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.process?view=net-6.0))
+
+```csharp
+process.StartInfo.CreateNoWindow = false;
+process.StartInfo.UseShellExecute = false;
+process.StartInfo.RedirectStandardError = true;
+process.StartInfo.RedirectStandardOutput = true;
+process.EnableRaisingEvents = true;
+process.ErrorDataReceived += (s, e) => Console.WriteLine(e.Data);
+process.OutputDataReceived += (s, e) => Console.WriteLine(e.Data);
+
+process.Start();
+process.BeginErrorReadLine();
+process.BeginOutputReadLine();
+```
+
+Above code write all game outputs to console. You can check game logs in console.
+
+## Launch custom game client
+
+You need two file: `<version_name>.jar`, `<version_name>.json`. Put these files into `<game_directory>/versions/<version_name>` directory.
+
+Example)
+
+```text
+<game_directory>
+ | - versions
+ |    | - myversion
+ |    |    | - myversion.jar
+ |    |    | - myversion.json
+```
+
+Make sure that version directory name, jar file name, json file name, and `id` property in version json file is all same.
+
+If you copy version json file from vanilla version json file, you should remove `downloads` property in version json file to prevent launcher overwrites your custom version jar file with vanilla version file.
+
+(Example for 1.12.2.json)
+
+```text
+1.12.2.json <-> 1.12.2-modified.json
+
+ | {
+ |     "assetIndex": {
+ |         "id": "1.12",
+ |         "sha1": "1584b57c1a0b5e593fad1f5b8f78536ca640547b",
+ |         "size": 143138,
+ |         "totalSize": 129336389,
+ |         "url": "https://launchermeta.mojang.com/v1/packages/1584b57c1a0b5e593fad1f5b8f78536ca640547b/1.12.json"
+ |     },
+ |     "assets": "1.12",
+ |     "complianceLevel": 0,
+-|      "downloads": {            <===== REMOVE this property
+-|         "client": {
+-|             "sha1": "0f275bc1547d01fa5f56ba34bdc87d981ee12daf",
+-|             "size": 10180113,
+-|             "url": "https://launcher.mojang.com/v1/objects/0f275bc1547d01fa5f56ba34bdc87d981ee12daf/client.jar"
+-|         },
+-|         "server": {
+-|             "sha1": "886945bfb2b978778c3a0288fd7fab09d315b25f",
+-|             "size": 30222121,
+-|             "url": "https://launcher.mojang.com/v1/objects/886945bfb2b978778c3a0288fd7fab09d315b25f/server.jar"
+-|         }
+-|    },
+*|     "id": "1.12.2-modified", <== make sure id is same as version name
+ |     "javaVersion": {
+ |         "component": "jre-legacy",
+ |         "majorVersion": 8
+ |     },
+```
+
+All version which Mojang launcher can launch also can be launched by CmlLib.Core. Make sure that your custom version works well in Mojang launcher before using CmlLib.Core. CmlLib.Core wouldn't able to launch your version if Mojang launcher can't.
+
+## [log4j2 vulnerability (CVE-2021-44228)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44228)
+
+Minecraft launched by `CmlLib 0.0.1` ~ `CmlLib.Core 3.3.3` may have log4j2 vulnerability. It is safe after `CmlLib.Core 3.3.4` version.
+
+# License
+
+<https://github.com/CmlLib/CmlLib.Core/blob/master/LICENSE>
+
+# Sample Launcher
+
+## CmlLibCoreSample
+
+[./examples/console](https://github.com/CmlLib/CmlLib.Core/blob/master/examples/console/Program.cs)\
+.NET Core console launcher. It contains only the essential code needed to launch Minecraft.
+
+## CmlLibWinFormSample
+
+[./examples/winform](https://github.com/CmlLib/CmlLib.Core/tree/master/examples/winform)\
+.NET Framework winforms launcher. This launcher has every feature included in CmlLib.Core.
+
+You don't have to fill out all of the textboxes. Just log in, select a version, and click the Launch button. [Launch Options](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/MLaunchOption/index.md)
+
+# Utilities
+
+# Minecraft Changelogs
+
+## Sample code
+
+See [ChangeLog.cs](https://github.com/CmlLib/CmlLib.Core/blob/master/examples/winform/ChangeLog.cs) in the CmlLibWinFormSample project.
+
+## Example
+
+```csharp
+Changelogs changelogs = await Changelogs.GetChangelogs(); // get changelog informations
+string[] versions = changelogs.GetAvailableVersions(); // get all available versions
+string changelogHtml = await changelogs.GetChangelogHtml("1.16.5"); // get html of 1.16.5 changelog
+```
+
+## Methods
+
+### static GetChangelogs()
+
+*Returns: `Task<Changelogs>`*
+
+Get changelog informations from mojang server.
+
+### GetAvailableVersions()
+
+*Returns: `string[]`*
+
+Returns Minecraft versions which have a changelog.
+
+### GetChangelogHtml(string version)
+
+*Returns: `Task<string>`*
+
+Returns the HTML code of the changelog of `version`. The HTML code contains only the changelog; there is no header or footer. You can display this HTML with the WebBrowser element if you'd like.
+
+# ProcessWrapper
+
+To check if the game launched successfully or terminated due to an error, you need to collect logs displayed in the process's standard output and check the exit code.
+
+Implementing this with the .NET `System.Diagnostics.Process` class returned by the CmlLib launcher can make the code complex. The `ProcessWrapper` class is provided to simplify this process.
+
+The core features of `ProcessWrapper` are:
+
+- Standard output reading: Notifies when the process's standard output is available as events.
+- Exit code checking: Asynchronously waits for the process to terminate and returns the exit code.
+
+**Usage Example**
+
+```csharp
+// 1. Create game process
+var process = launcher.BuildProcessAsync("1.20.4", new MLaunchOption());
+
+// 2. Create ProcessWrapper
+var processWrapper = new ProcessWrapper(process);
+
+// 3. Set up actions when logs are output
+processWrapper.OutputReceived += (sender, log) => 
+{
+    // (Example) Simply output logs to console as-is
+    Console.WriteLine(log);
+};
+
+// 4. Start the process
+processWrapper.StartWithEvents();
+
+// 5. Wait for the process to terminate and check the exit code
+int exitCode = await processWrapper.WaitForExitTaskAsync();
+if (exitCode == 0)
+{
+    Console.WriteLine("Game terminated successfully.");
+}
+else
+{
+    Console.WriteLine($"Game error occurred! Exit code: {exitCode}");
+}
+```
+
+## API Reference
+
+- [ProcessWrapper](https://cmllib.github.io/CmlLib.Core/api/CmlLib.Core.ProcessBuilder.ProcessWrapper.html)
+# Auth.Microsoft
+
+# Home
+
+[GitHub](https://github.com/CmlLib/CmlLib.Core.Auth.Microsoft)
+
+Version: 3.0.0
+
+## [CmlLib.Core.Auth.Microsoft](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/index.md)
+
+Log into Minecraft: Java Edition with a Microsoft Xbox account.
+
+## [CmlLib.Core.Bedrock.Auth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.bedrock.auth/index.md)
+
+Issue authentication tokens to access Minecraft: Bedrock Edition servers with a Microsoft Xbox account.
+
+## [XboxAuthNet.Game](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/index.md)
+
+Provides functionality commonly used by `CmlLib.Core.Auth.Microsoft` and `CmlLib.Core.Bedrock.Auth`.
+
+## [XboxAuthNet.Game.Msal](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/index.md)
+
+By default, `CmlLib.Core.Auth.Microsoft` and `CmlLib.Core.Bedrock.Auth` only work on Windows. `XboxAuthNet.Game.Msal` provides extensions for use on other platforms such as Linux and macOS.
+
+## API Reference
+
+For accurate type information, namespace, and method signatures, refer to the [API Reference](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/toc.html). When using with LLMs, make sure to include this URL as well.
+
+## LLM
+
+[llms.txt](https://cmllib.github.io/CmlLib.Core-wiki/en/llms.txt) is provided.
+
+# CmlLib.Core.Bedrock.Auth
+
+A library that issues tokens to join to servers for Minecraft: BE.
+
+## Install
+
+Install nuget package `CmlLib.Core.Bedrock.Auth`.
+
+## Usage
+
+[Example](https://github.com/CmlLib/CmlLib.Core.Auth.Microsoft/blob/dev/tests/CmlLib.Core.Bedrock.Auth.Test/Sample.cs)
+
+See [CmlLib.Core.Auth.Microsoft](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/index.md) for details.
+
+# Resources
+
+## Logs
+
+All libraries uses Microsoft.Extensions.Logging for logging. ([docs](https://learn.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line))
+
+### Log Event Id
+
+| EventId | Meaning                                |
+| ------- | -------------------------------------- |
+| 749xxx  | Logs from xboxauthnet.game.            |
+| 750xxx  | Logs from xboxauthnet.game.msal.       |
+| 751xxx  | Logs from cmllib.core.auth.microsoft.  |
+| 752xxx  | Logs from cmllib.core.bedrock.auth.md. |
+| xxx0xx  | Trace                                  |
+| xxx1xx  | Debug                                  |
+| xxx2xx  | Information                            |
+| xxx3xx  | Warning                                |
+| xxx4xx  | Error                                  |
+| xxx5xx  | Critical                               |
+
+## Known Issues
+
+### System.ArgumentException with Costura.Fody
+
+[issue 19](https://github.com/CmlLib/CmlLib.Core.Auth.Microsoft/issues/19)
+
+There is a issue when you use WebView2 and Costura.Fody together.
+
+### Age related issues (child, age verification, family account, etc)
+
+1. Make sure your Xbox authentication flow uses Full() or Sisu(). [XboxAuth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/xboxauth/index.md)
+1. Make sure the account you're trying to sign in with is the one you purchased Minecraft with, as most users experiencing this error were trying to sign in with an account that didn't purchase Minecraft.
+1. Try turning on the Mojang Launcher, logging out, and logging back in from the Mojang Launcher. If you need to do anything age-related, the Mojang Launcher will tell you how.
+1. Try signing out of the [Xbox](https://www.xbox.com) and signing back in. If you need to take any age-related actions, you should see a page shortly after signing in.
+
+You'll need a properly age verified account to log in to Minecraft. Age verification is usually done automatically by the Mojang Launcher, so accounts that can be logged in from the Mojang Launcher will not see this error.
+
+Minors can log in from the Mojang Launcher if they go through both the age verification and family account registration process. However, if a parent has blocked them from playing the game, or if the account has been removed from the family, the error may occur again. Try logging in again from the Mojang Launcher and it will let you know what you need to do.
+
+# CmlLib.Core.Auth.Microsoft
+
+## Install
+
+Install nuget package [CmlLib.Core.Auth.Microsoft](https://www.nuget.org/packages/CmlLib.Core.Auth.Microsoft)
+
+```text
+dotnet add package CmlLib.Core.Auth.Microsoft
+```
+
+## Getting Started
+
+```csharp
+using CmlLib.Core.Auth.Microsoft;
+
+var loginHandler = JELoginHandlerBuilder.BuildDefault();
+var session = await loginHandler.Authenticate();
+```
+
+Set `Session` property of [Launch Options](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/MLaunchOption/index.md).
+
+## Example
+
+[CmlLib-Minecraft-Launcher](https://github.com/CmlLib/CmlLib-Minecraft-Launcher): CmlLib.Core and CmlLib.Core.Auth.Microsoft sample launcher.
+
+[WinFormTest](https://github.com/CmlLib/CmlLib.Core.Auth.Microsoft/blob/dev/examples/WinFormTest)
+
+[ConsoleTest](https://github.com/CmlLib/CmlLib.Core.Auth.Microsoft/blob/dev/examples/ConsoleTest/Program.cs)
+
+## Usage
+
+### [JELoginHandler](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeloginhandler/index.md)
+
+Login, logout, and account managements.
+
+### [JELoginHandlerBuilder](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeloginhandlerbuilder/index.md)
+
+Builder for initializing an instance of `JELoginHandler`.
+
+### [AccountManager](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/accountmanager/index.md)
+
+Manage account list.
+
+# Authentication with MSAL
+
+`JELoginHandler` only works on Windows. To use it on another platform, you must use it with [XboxAuthNet.Game.Msal](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/index.md).
+
+There are two ways to use `CmlLib.Core.Auth.Microsoft` with `XboxAuthNet.Game.Msal`.
+
+- Register an `OAuthProvider` when initializing `JELoginHandler`.
+- Create an `IAuthenticator` and add a MSAL authenticator.
+
+### Register an OAuthProvider
+
+Register the `OAuthProvider` when initializing the `JELoginHandler` so that all subsequent methods you call will handle the login with the MSAL.
+
+```csharp
+var app = await MsalClientHelper.BuildApplicationWithCache("CLIENT-ID");
+var loginHandler = new JELoginHandlerBuilder()
+    .WithOAuthProvider(new MsalCodeFlowProvider(app))
+    .Build();
+
+// login
+var session = await loginHandler.Authenticate();
+
+// add new account
+var session = await loginHandler.AuthenticateInteractively();
+
+// login with most recently logged in account
+var session = await loginHandler.AuthenticateSilently();
+
+// clear
+await loginHandler.Signout();
+
+// signout
+await loginHandler.SignoutWithBrowser();
+```
+
+For more information about `loginHandler`, see [JELoginHandler](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeloginhandler/index.md).
+
+### Using AddMsalOAuth
+
+Authenticating with new account:
+
+```csharp
+var app = await MsalClientHelper.BuildApplicationWithCache("CLIENT-ID");
+var loginHandler = new JELoginHandlerBuilder()
+    .Build();
+
+// create authenticator with new account
+var authenticator = loginHandler.CreateAuthenticatorWithNewAccount();
+authenticator.AddMsalOAuth(app, msal => msal.Interactive());
+authenticator.AddXboxAuthForJE(xbox => xbox.Basic());
+authenticator.AddForceJEAuthenticator();
+var session = await authenticator.ExecuteForLauncherAsync();
+```
+
+Authenticating with the most recent account:
+
+```csharp
+var app = await MsalClientHelper.BuildApplicationWithCache("CLIENT-ID");
+var loginHandler = new JELoginHandlerBuilder()
+    .Build();
+
+// create authenticator with the most recent account
+var authenticator = loginHandler.CreateAuthenticatorWithDefaultAccount();
+authenticator.AddMsalOAuth(app, msal => msal.Silent());
+authenticator.AddXboxAuthForJE(xbox => xbox.Basic());
+authenticator.AddJEAuthenticator();
+var session = await authenticator.ExecuteForLauncherAsync();
+```
+
+Signout:
+
+```csharp
+var app = await MsalClientHelper.BuildApplicationWithCache("CLIENT-ID");
+var loginHandler = new JELoginHandlerBuilder()
+    .Build();
+
+var authenticator = loginHandler.CreateAuthenticatorWithDefaultAccount();
+authenticator.AddMsalOAuth(app, msal => msal.ClearSession());
+authenticator.AddXboxAuthSignout();
+authenticator.AddJESignout();
+var session = await authenticator.ExecuteForLauncherAsync();
+```
+
+For more methods in MSAL, such as `msal.Interactive()`, `msal.Silent()`, and more, see [OAuth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/oauth/index.md).
+
+## API Reference
+
+- [JELoginHandler](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/CmlLib.Core.Auth.Microsoft.JELoginHandler.html)
+- [MsalClientHelper](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/XboxAuthNet.Game.Msal.MsalClientHelper.html)
+- [MsalCodeFlowProvider](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/XboxAuthNet.Game.Msal.OAuth.MsalCodeFlowProvider.html)
+- [MsalDeviceCodeProvider](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/XboxAuthNet.Game.Msal.OAuth.MsalDeviceCodeProvider.html)
+- [MsalOAuthBuilder](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/XboxAuthNet.Game.Msal.MsalOAuthBuilder.html)
+
+# JEAuthenticator
+
+## AddJEAuthenticator
+
+```csharp
+authenticator.AddJEAuthenticator();
+```
+
+The cached JE session is validated first, and if the session is expired or invalid, the JE authentication is attempted with the Xbox session.
+
+## AddForceJEAuthenticator
+
+```csharp
+authenticator.AddForceJEAuthenticator();
+```
+
+Proceeds with the JE sign-in to the Xbox session, without validating the cached JE session.
+
+## WithGameOwnershipChecker(bool value)
+
+```csharp
+authenticator.AddJEAuthenticator(je => je
+    .WithGameOwnershipChecker(false)
+    .Build());
+```
+
+Sets whether to check if the game is purchased and owned. default: `false`
+
+Game Ownership Checker
+
+GameOwnershipChecker can only check if the game was purchased from the official Mojang site. It is recommended that you **DO NOT change the default value** of false because Xbox GamePass user will be determined that they do not have an account even they have valid game license.
+
+## JEAuthException
+
+This exception is thrown if something went wrong while logging into Minecraft JE. The `ErrorType`, `Error`, and `ErrorMessage` properties provide detailed error information.
+
+### 403: FORBIDDEN
+
+If the OAuth token is from third-party client id, you should register the client ID. See the last part of [ClientID](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/clientid/index.md).
+
+### 404: NOT_FOUND
+
+The user doesn't have the game. (Demo version)
+
+## API Reference
+
+- [Extensions](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/CmlLib.Core.Auth.Microsoft.Extensions.html)
+- [JEAuthenticatorBuilder](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/CmlLib.Core.Auth.Microsoft.Authenticators.JEAuthenticatorBuilder.html)
+
+# JELoginHandler
+
+## Creating JELoginHandler instance
+
+```csharp
+var loginHandler = JELoginHandlerBuilder.BuildDefault();
+```
+
+For more detailed initialization, which includes specifying how accounts are stored, setting up HttpClient, and more, please refer to [JELoginHandlerBuilder](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeloginhandlerbuilder/index.md).
+
+## Basic Authentication
+
+```csharp
+var session = await loginHandler.Authenticate();
+// var session = await loginHandler.Authenticate(selectedAccount, cancellationToken);
+```
+
+This method tries [#authenticating-with-the-most-recent-account](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeloginhandler/#authenticating-with-the-most-recent-account) first and if it fails, tries [#authenticating-with-new-account](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeloginhandler/#authenticating-with-new-account).
+
+## Authenticating with New Account
+
+```csharp
+var session = await loginHandler.AuthenticateInteractively();
+// var session = await loginHandler.AuthenticateInteractively(selectedAccount, cancellationToken);
+```
+
+Add a new account to sign in. Show the user the Microsoft OAuth page to enter their Microsoft account.
+
+Microsoft WebView2 Requirements
+
+This method uses [Microsoft WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) for displaying Microsoft OAuth login page. You must know that:
+
+- **Microsoft WebView2 is only available on Windows.** For another platform, see [Authentication with MSAL](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/authentication-with-msal/index.md).
+- To run WebView2, The users (including developer and end user) **must have the WebView2 Runtime installed**. See [this document](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/distribution) to distribute your launcher with WebView2. (For example, you can automate runtime installation with direct download link: <https://go.microsoft.com/fwlink/p/?LinkId=2124703>)
+
+If you don't want to use WebView2, see [Authentication with MSAL](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/authentication-with-msal/index.md).
+
+## Authenticating with the Most Recent Account
+
+```csharp
+var session = await loginHandler.AuthenticateSilently();
+// var session = await loginHandler.AuthenticateSilently(selectedAccount, cancellationToken);
+```
+
+Using the saved account information of the most account, log in.
+
+- If the user is already logged in, this method returns the logged in information immediately.
+- If the user's login information has expired, try to refresh it. No user interaction nor webview is required during this process.
+- If there is no saved login information or if refresh failed, an `MicrosoftOAuthException` will be thrown. In this case you should authenticate again using new account methods like [#authenticating-with-new-account](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeloginhandler/#authenticating-with-new-account).
+
+## List Accounts
+
+```csharp
+var accounts = loginHandler.AccountManager.GetAccounts();
+foreach (var account in accounts)
+{
+    if (account is not JEGameAccount jeAccount)
+        continue;
+    Console.WriteLine("Identifier: " + jeAccount.Identifier);
+    Console.WriteLine("LastAccess: " + jeAccount.LastAccess);
+    Console.WriteLine("Gamertag: " + jeAccount.XboxTokens?.XstsToken?.XuiClaims?.Gamertag);
+    Console.WriteLine("Username: " + jeAccount.Profile?.Username);
+    Console.WriteLine("UUID: " + jeAccount.Profile?.UUID);
+}
+```
+
+After a successful login, the account is saved. Above code list all saved account lists.
+
+## Select Account
+
+Select account by index number:
+
+```csharp
+var accounts = loginHandler.AccountManager.GetAccounts();
+var selectedAccount = accounts.ElementAt(1);
+```
+
+All account has **unique string** to identify them. Select account by identifier:
+
+```csharp
+var accounts = loginHandler.AccountManager.GetAccounts();
+var selectedAccount = accounts.GetAccount("Identifier");
+```
+
+Select account by JE username:
+
+```csharp
+var accounts = loginHandler.AccountManager.GetAccounts();
+var selectedAccount = accounts.GetJEAccountByUsername("username");
+```
+
+## Authenticating with the Selected Account
+
+```csharp
+var accounts = loginHandler.AccountManager.GetAccounts();
+var selectedAccount = accounts.ElementAt(1);
+var session = await loginHandler.Authenticate(selectedAccount);
+```
+
+Load account list and authenticate with second account (index number 1).
+
+## Signing out from the most Recent Account
+
+Browser Cache
+
+`Signout` method does not clear WebView2 browser cache. For clearing it, call `SignoutWithBrowser` instead.
+
+```csharp
+await loginHandler.Signout();
+// await loginHandler.SignoutWithBrowser();
+```
+
+## Signing out from the Selected Account
+
+Browser Cache
+
+`Signout` method does not clear WebView2 browser cache. For clearing it, call `SignoutWithBrowser` instead.
+
+```csharp
+var accounts = loginHandler.AccountManager.GetAccounts();
+var selectedAccount = accounts.ElementAt(1);
+await loginHandler.Signout(selectedAccount);
+// await loginHandler.SignoutWithBrowser();
+```
+
+Load account list and sign out from second account (index number 1).
+
+## Authenticating with More Options
+
+```csharp
+using XboxAuthNet.Game;
+
+// 1. Create Authenticator 
+var authenticator = loginHandler.CreateAuthenticator(account, default);
+
+// 2. OAuth
+authenticator.AddMicrosoftOAuthForJE(oauth => oauth.Interactive());
+
+// 3. XboxAuth
+authenticator.AddXboxAuthForJE(xbox => xbox.Basic());
+
+// 4. JEAuthenticator
+authenticator.AddJEAuthenticator();
+
+// Execute authenticator
+var session = await authenticator.ExecuteForLauncherAsync();
+```
+
+The login process has four main steps. There are many methods to customize authentication flow in each main step. You must select only one method for each step.
+
+### 1. Create Authenticator
+
+```csharp
+var authenticator = loginHandler.CreateAuthenticator(account, default);
+```
+
+Initialize `Authenticator` instance with the specific account to login. Another ways to initialize this:
+
+```csharp
+var authenticator = loginHandler.CreateAuthenticatorWithNewAccount(default);
+```
+
+Initialize `Authenticator` with new empty account.
+
+```csharp
+var authenticator = loginHandler.CreateAuthenticatorWithDefaultAccount(default);
+```
+
+Initialize `Authenticator` with the most recent account.
+
+You can pass [CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken?view=net-7.0) instead of `default`.
+
+### 2. OAuth
+
+```csharp
+authenticator.AddMicrosoftOAuthForJE(oauth => oauth.Interactive());
+
+// above code is same as
+// authenticator.AddMicrosoftOAuth(JELoginHandler.DefaultMicrosoftOAuthClientInfo, oauth => oauth.Interactive());
+
+// another OAuth method can be:
+// 1) authenticator.AddForceMicrosoftOAuthForJE(oauth => oauth.Interactive());
+// 2) authenticator.AddMicrosoftOAuthForJE(oauth => oauth.Silent());
+// ...
+```
+
+Set Microsoft OAuth mode. Instead of `oauth => oauth.Interactive()`, there are many options you can replace with. See [OAuth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/oauth/index.md).
+
+`AddMicrosoftOAuthForJE` and `AddForceMicrosoftOAuthForJE` methods add default `MicrosoftOAuthClientInfo` which Mojang Minecraft launcher uses so that you don't need to pass it everytime you use.
+
+Note that the default Microsoft OAuth is only available on Windows platform. For another platform (Linux, macOS) you need [xboxauthnet.game.msal](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/index.md).
+
+```csharp
+// example for XboxAuthNet.Game.Msal
+authenticator.AddMsalOAuth(app, msal => msal.Interactive());
+```
+
+### 3. XboxAuth
+
+```csharp
+authenticator.AddXboxAuthForJE(xbox => xbox.Basic());
+
+// above code is same as
+// authenticator.AddXboxAuth(xbox => xbox.WithRelyingParty(JELoginHandler.RelyingParty).Basic());
+
+// another xbox auth method can be:
+// 1) authenticator.AddXboxAuthForJE(xbox => xbox.Full());
+// 2) authenticator.AddXboxAuthForJE(xbox => xbox.Sisu("<CLIENT-ID>"));
+// ...
+```
+
+Set Xbox authentication mode. Instead of `xbox => xbox.Basic()`, there are many options you can replace with. See [XboxAuth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/xboxauth/index.md).
+
+`AddXboxAuthForJE` and `AddForceXboxAuthForJE` methods add default xbox authentication relying party which is used for Minecraft: JE authentication so that you don't need to pass it everytime you use.
+
+### 4. JEAuthenticator
+
+Set Minecraft: JE authentication mode. See [JEAuthenticator](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeauthenticator/index.md).
+
+## API Reference
+
+- [JELoginHandler](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/CmlLib.Core.Auth.Microsoft.JELoginHandler.html)
+- [Extensions](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/CmlLib.Core.Auth.Microsoft.Extensions.html)
+- [JEAuthenticatorBuilder](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/CmlLib.Core.Auth.Microsoft.Authenticators.JEAuthenticatorBuilder.html)
+- [JEGameAccount](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/CmlLib.Core.Auth.Microsoft.Sessions.JEGameAccount.html)
+- [IXboxGameAccountManager](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/XboxAuthNet.Game.Accounts.IXboxGameAccountManager.html)
+
+# JELoginHandlerBuilder
+
+```csharp
+// Build with default options
+var loginHandler = JELoginHandlerBuilder.BuildDefault();
+```
+
+```csharp
+// Build with options
+var loginHandler = new JELoginHandlerBuilder()
+    .WithHttpClient(httpClient)
+    .WithAccountManager("accounts.json")
+    //.WithAccountManager(new InMemoryXboxGameAccountManager(JEGameAccount.FromSessionStorage))
+    .Build();
+var session = await loginHandler.Authenticate();
+```
+
+### WithHttpClient
+
+Set `HttpClient`. All HTTP requests are handled by this.
+
+### WithAccountManager
+
+Set `IXboxGameAccount` which `JELoginHandler` will use. Default is `JsonXboxGameAccountManager` with the `<MINECRAFT-PATH>/cml_accounts.json` file.
+
+If you pass a string type, this method will call `WithAccountManager(new JsonXboxGameAccountManager(filePath, JEGameAccount.FromSessionStorage))`.
+
+### WithLogger
+
+Set [ILogger](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.ilogger?view=dotnet-plat-ext-7.0) for logging. This library use [Microsoft.Extensions.Logging](https://learn.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line) to logging.
+
+## API Reference
+
+- [JELoginHandler](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/CmlLib.Core.Auth.Microsoft.JELoginHandler.html)
+- [JELoginHandlerBuilder](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/CmlLib.Core.Auth.Microsoft.JELoginHandlerBuilder.html)
+- [IXboxGameAccountManager](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/XboxAuthNet.Game.Accounts.IXboxGameAccountManager.html)
+
+# XboxAuthNet.Game
+
+It provides common functionality for Xbox game authentication, including Microsoft OAuth, Xbox authentication, and account management.
+
+For example, the common functionality of [CmlLib.Core.Auth.Microsoft](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/index.md) for logging into Minecraft Java Edition and [CmlLib.Core.Bedrock.Auth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.bedrock.auth/index.md) for logging into Badrock Edition are both provided by this library.
+
+## Install
+
+You don't need to install this package manually. `CmlLib.Core.Auth.Microsoft` depends this package.
+
+## Authenticator
+
+### [OAuth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/oauth/index.md)
+
+Provides OAuth sign-in with a Microsoft account.
+
+### [XboxAuth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/xboxauth/index.md)
+
+Provides for Xbox authentication with a Microsoft OAuth token.
+
+### Extensions
+
+Authentication are designed to be easily extensible: you can easily add new authenticator, and you can freely reorder them.
+
+For example, there is extension library for Microsoft OAuth using MSAL library, [xboxauthnet.game.msal](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/index.md).
+
+## Account
+
+### [AccountManager](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/accountmanager/index.md)
+
+Manage account list.
+
+### [Accounts](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/accounts/index.md)
+
+Manage each account.
+
+# AccountManager
+
+Describes how to manage multiple accounts. Each account is identified by a unique value called `identifier`.
+
+Minecraft: Java Edition Accounts
+
+For more methods for Minecraft: Java Edition account, see [JELoginHandler](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeloginhandler/index.md).
+
+## Get All Accounts
+
+```csharp
+var accounts = loginHandler.AccountManager.GetAccounts();
+foreach (var account in accounts)
+{
+    Console.WriteLine(account.Identifier);
+}
+```
+
+## Get Account by Identifier
+
+```csharp
+var accounts = loginHandler.AccountManager.GetAccounts();
+var account = accounts.GetAccount("identifier");
+```
+
+## Get the Most Recent Account
+
+```csharp
+var account = loginHandler.AccountManager.GetDefaultAccount();
+```
+
+## Create New Empty Account
+
+```csharp
+var account = loginHandler.AccountManager.NewAccount();
+```
+
+## Clear All Accounts
+
+```csharp
+loginHandler.AccountManager.ClearAccounts();
+```
+
+## Save
+
+```csharp
+loginHandler.AccountManager.SaveAccounts();
+```
+
+## API Reference
+
+- [JEGameAccount](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/CmlLib.Core.Auth.Microsoft.Sessions.JEGameAccount.html)
+- [IXboxGameAccountManager](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/XboxAuthNet.Game.Accounts.IXboxGameAccountManager.html)
+
+# Accounts
+
+## ISessionStorage
+
+Sessions are stored in `ISessionStorage`, along with the various tokens obtained during the login process. One account is stored in one instance of `ISessionStorage`. For example, when a user named `Notch` logs in, they get a Microsoft OAuth token, an Xbox token, and a Minecraft JE token. All three would be stored in a single instance of `ISessionStorage`, which would only contain login information specific to the user `Notch`.
+
+There are three implementations of `ISessionStorage`: `InMemorySessionStorage`, which stores all information in memory; `JsonSessionStorage`, which manages it as an in-memory Json object; and `JsonFileSessionStorage`, which manages it as a Json file.
+
+### Example
+
+```csharp
+var sessionStorage = new InMemorySessionStorage();
+
+// save data
+sessionStorage.Set<string>("myData", "HelloWorld");
+
+// load data
+var myData = sessionStorage.Get<string>("myData");
+
+// save and load data via ISessionSource
+var sessionSource = MicrosoftOAuthSessionSource.Default;
+sessionSource.Set(sessionStorage, new MicrosoftOAuthResponse());
+var oauth = sessionSource.Get(sessionStorage);
+```
+
+## XboxGameAccount
+
+XboxGameAccount has an ISessionStorage internally and provides additional functionality.
+
+- Provides an identifier to distinguish between ISessionStorages.
+- Provides properties to easily access the session information held by the ISessionStorage (e.g. LastAccess, XboxTokens).
+
+### Identifier
+
+To manage multiple accounts, you need to manage multiple ISessionStorages, and you need an identifier to distinguish each ISessionStorage.
+
+If two accounts have the same identifier, they are considered to be the same account, even if the ISessionStorage contains different data.
+
+For example, `JEGameAccount`, which represents a Minecraft Java Edition account, uses the user's UUID as the identifier.
+
+### LastAccess
+
+Indicates the last time this account was accessed.
+
+### XboxTokens
+
+## API Reference
+
+- [JEGameAccount](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/CmlLib.Core.Auth.Microsoft.Sessions.JEGameAccount.html)
+- [IXboxGameAccountManager](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/XboxAuthNet.Game.Accounts.IXboxGameAccountManager.html)
+
+# OAuth
+
+## Example
+
+Add `Authenticator` through the extension methods of `ICompositeAuthenticator`.
+
+```csharp
+using XboxAuthNet.Game;
+
+var clientInfo = new MicrosoftOAuthClientInfo("<MICROSOFT_OAUTH_CLIENT_ID>", "<MICROSOFT_OAUTH_SCOPES>");
+var authenticator = // create authenticator using login handlers
+
+// example 1
+authenticator.AddForceMicrosoftOAuth(clientInfo, oauth => oauth.Interactive());
+
+// example 2
+authenticator.AddMicrosoftOAuth(clientInfo, oauth => oauth.Silent());
+```
+
+## AddMicrosoftOAuth / AddForceMicrosoftOAuth
+
+`AddMicrosoftOAuth` validates the cached Microsoft OAuth session and, if the session is valid, doesn't proceed authentication and moves on to the next authenticator.
+
+The Force method does not validate the Microsoft OAuth session and proceeds authentication unconditionally.
+
+## Setting OAuth Mode
+
+### Interactive
+
+```csharp
+authenticator.AddMicrosoftOAuth(clientInfo, oauth => oauth.Interactive());
+```
+
+```csharp
+authenticator.AddMicrosoftOAuth(clientInfo, oauth => oauth.Interactive(new MicrosoftOAuthParameters
+{
+    // OAuth setting
+    // example: set prompt mode
+    Prompt = MicrosoftOAuthPromptModes.SelectAccount
+}));
+```
+
+A window will pop up prompting the user to enter the email and password for their Microsoft account and proceed to sign in.
+
+Microsoft WebView2 Requirements
+
+This method uses [Microsoft WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) for displaying Microsoft OAuth login page. You must know that:
+
+- **Microsoft WebView2 is only available on Windows.** For another platform, see [Authentication with MSAL](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/authentication-with-msal/index.md).
+- To run WebView2, The users (including developer and end user) **must have the WebView2 Runtime installed**. See [this document](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/distribution) to distribute your launcher with WebView2. (For example, you can automate runtime installation with direct download link: <https://go.microsoft.com/fwlink/p/?LinkId=2124703>)
+
+If you don't want to use WebView2, see [Authentication with MSAL](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/authentication-with-msal/index.md).
+
+### Silent
+
+```csharp
+authenticator.AddMicrosoftOAuth(clientInfo, oauth => oauth.Silent());
+```
+
+Proceed with the login without prompting the user for a login. If the cached session hasn't expired, the token will be used; if it has, it will attempt to refresh it. If the refresh fails, a `MicrosoftOAuthException` exception is thrown.
+
+### Signout
+
+Clears only cached OAuth sessions. The browser on user may still have user's login information.
+
+```csharp
+authenticator.AddMicrosoftOAuthSignout(clientInfo);
+```
+
+### Signout with Clearing Browser Cache
+
+Displays the OAuth sign out page and clears the session.
+
+```csharp
+authenticator.AddMicrosoftOAuthBrowserSignout(clientInfo);
+```
+
+or, you can set browser options:
+
+```csharp
+authenticator.AddMicrosoftOAuthBrowserSignout(clientInfo, codeFlow =>
+{
+    // set more options like UI title, UI parents, etc... 
+    codeFlow.WithUITitle("My Window");
+});
+```
+
+## API Reference
+
+- [MicrosoftOAuthBuilder](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/XboxAuthNet.Game.OAuth.MicrosoftOAuthBuilder.html)
+
+# XboxAuth
+
+## Example
+
+```csharp
+var authenticator = // create authenticator using login handlers
+authenticator.AddXboxAuthForJE(xbox => xbox.Basic());
+//authenticator.AddXboxAuth(xbox => xbox.Basic(XboxAuthConstants.XboxLiveRelyingParty)); // same code
+```
+
+## Basic
+
+```csharp
+authenticator.AddXboxAuthForJE(xbox => xbox.Basic());
+//authenticator.AddXboxAuth(xbox => xbox.Basic("relyingParty"));
+```
+
+This is the most basic method. It only gets the minimum information (UserToken, XstsToken) needed to log in.
+
+Accounts that are not age-verified, and accounts that are under the age of 18 may experience issues when logging in this way (error codes `8015dc0c`, `8015dc0d`, `8015dc0e`).\
+You can work around this by using the [#full](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/xboxauth/#full) method or the [#sisu](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/xboxauth/#sisu) method.
+
+## Full
+
+```csharp
+authenticator.AddXboxAuthForJE(xbox => xbox.Full());
+//authenticator.AddXboxAuth(xbox => xbox.Full("relyingParty"));
+```
+
+Gets the UserToken, DeviceToken, and XstsToken.
+
+## Sisu
+
+```csharp
+authenticator.AddXboxAuthForJE(xbox => xbox.Sisu(XboxGameTitles.MinecraftJava));
+//authenticator.AddXboxAuth(xbox => xbox.Sisu("relyingParty",  "<CLIENT-ID>"));
+```
+
+Use the SISU login method. Get all tokens: UserToken, DeviceToken, TitleToken, XstsToken. Most age-related issues can be resolved this way.
+
+This only works if `<CLIENT-ID>` is related to an Xbox game (for example, the CLIENT-ID used by the Minecraft launcher).
+
+You can't use a personally issued Azure ID, i.e. you can't use it with MSAL.
+
+## Device Options
+
+```csharp
+authenticator.AddXboxAuth(xbox => xbox
+    .WithDeviceType(XboxDeviceTypes.Win32)
+    .WithDeviceVersion("0.0.0")
+    .Full("relyingParty"));
+```
+
+When using a authentication method that gets a DeviceToken, you can apply the Device settings. Call `.WithDeviceType()` and `.WithDeviceVersion()` before calling the authentication method.
+
+## Handling errors
+
+There are various error scenarios when authenticating with Xbox. If an error occurs during authentication, an `XboxAuthException` is thrown and you can get an ErrorCode and ErrorMessage.
+
+All ErrorCodes can be found [XboxAuthException](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/xboxauthexception/index.md).
+
+## API Reference
+
+- [XboxAuthBuilder](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/XboxAuthNet.Game.XboxAuth.XboxAuthBuilder.html)
+
+# XboxAuthException
+
+`ErrorCode` and `ErrorMessage` describe the error in detail.
+
+**If you purchased Minecraft, most of the errors below will not occur. Make sure the account you are trying to log in with is the account that purchased Minecraft.**
+
+Age-related issues can be resolved by changing the login mode to `Full` or `Sisu`. [XboxAuth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game/xboxauth/index.md)
+
+## ErrorCode
+
+### 0x8015dc03
+
+The device or user was banned.
+
+### 0x8015dc04
+
+The device or user was banned.
+
+### 0x8015dc0b
+
+This resource is not available in the country associated with the user.
+
+### 0x8015dc0c
+
+Access to this resource requires age verification.
+
+### 0x8015dc0d
+
+Access to this resource requires age verification.
+
+### 0x8015dc0e
+
+ACCOUNT_CHILD_NOT_IN_FAMILY
+
+### 0x8015dc09
+
+ACCOUNT_CREATION_REQUIRED
+
+### 0x8015dc10
+
+ACCOUNT_MAINTENANCE_REQUIRED
+
+### Others
+
+All error codes: [here](https://github.com/microsoft/xbox-live-api/blob/730f579d41b64df5b57b52e629d12f23c6fb64ac/Source/Shared/errors_legacy.h#L924)
+
+# XboxAuthNet.Game.Msal
+
+Provides an extension method to perform Microsoft OAuth using MSAL.
+
+With MSAL, you can sign in on any platform, including Linux and macOS, not just Windows.
+
+## Install
+
+Nuget package [XboxAuthNet.Game.Msal](https://www.nuget.org/packages/XboxAuthNet.Game.Msal)
+
+To use this package, you must properly initialize `IPublicClientApplication`.
+
+```text
+dotnet add package XboxAuthNet.Game.Msal
+```
+
+## [ClientID](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/clientid/index.md)
+
+Describes how to register Azure application for `IPublicClientApplication`.
+
+## [MsalClientHelper](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/msalclienthelper/index.md)
+
+Describes how to initialize an `IPublicClientApplication` for Xbox games.
+
+## [OAuth](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/oauth/index.md)
+
+Describes a way to perform Microsoft OAuth using MSAL.
+
+# ClientID
+
+For using MSAL, You should acquire your own Azure Client ID. This document describes how to acquire your own Azure Client ID for Xbox authentication.
+
+## 1. Go to Azure Active Directory
+
+Open [Azure Portal](https://portal.azure.com/) and find Azure Active Directory menu.
+
+## 2. App registration
+
+Add - App Registration
+
+Name: your app name\
+Account type: Accounts in any organizational directory (Any Azure AD directory - Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)\
+Redirect URI: Public client/native, <http://localhost>
+
+Click 'Register' button.
+
+## 3. Authentication manage
+
+Go to App registrations - your app name
+
+**In this screen, you can get Application (Client) ID**\
+Click Redirect URIs
+
+Add 'Msal Only'
+
+Scroll down and 'Allow public client flows'
+
+Click 'Save' button
+
+## 4. Register Client ID
+
+After creating your application in Azure, you need to allowlist your Client ID to prevent 403: FORBIDDEN errors from the Minecraft authentication API. Follow the guidance in the official Minecraft help article to ensure your application is recognized.
+
+<https://help.minecraft.net/hc/en-us/articles/16254801392141>
+
+<https://github.com/CmlLib/CmlLib.Core.Auth.Microsoft/issues/16>
+
+# MsalClientHelper
+
+## Example
+
+```csharp
+using XboxAuthNet.Game.Msal;
+
+IPublicClientApplication app = await MsalClientHelper.BuildApplicationWithCache("<CLIENT-ID>");
+```
+
+Fill your Azure App Id in `<CLIENT-ID>`. For more information, see the [ClientID](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/clientid/index.md).
+
+## CreateDefaultApplicationBuilder(string cid)
+
+Initializing a `PublicClientApplicationBuilder` instance set up for Xbox authentication.
+
+## RegisterCache(IPublicClientApplication app, MsalCacheSettings cacheSettings)
+
+Apply the cache settings object, `cacheSettings`, to `app`.
+
+## RegisterCache(IPublicClientApplication app, StorageCreationProperties storageProperties)
+
+Apply the cache settings object `storageProperties` to `app`.
+
+## BuildApplication(string cid)
+
+Initializing an `IPublicClientApplication` set up for Xbox authentication.
+
+## BuildApplicationWithCache(string cid)
+
+Initializing an `IPublicClientApplication` set up for Xbox authentication and returns it with the default account cache settings applied.
+
+The default cache settings are:
+
+## BuildApplicationWithCache(string cid, MsalCacheSettings cacheSettings)
+
+Initializing an `IPublicClientApplication` set up for Xbox authentication, applies the cache settings, `cacheSettings`, and returns it.
+
+## BuildApplicationWithCache(string cid, StorageCreationProperties storageProperties)
+
+Create an `IPublicClientApplication` set up for Xbox authentication and return it with the cache settings, `storageProperties`.
+
+## ToMicrosoftOAuthResponse(AuthenticationResult result)
+
+Convert the MSAL login result, `AuthenticationResult`, to a `MicrosoftOAuthResponse` object used by `XboxAuthNet`.
+
+## API Reference
+
+- [MsalClientHelper](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/XboxAuthNet.Game.Msal.MsalClientHelper.html)
+
+# OAuth
+
+Describes a way to proceed with Microsoft OAuth via MSAL.
+
+You MUST initialize an [IPublicClientApplication](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/msalclienthelper/index.md) via [YOUR CLIENT ID](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/xboxauthnet.game.msal/clientid/index.md) before to use this!
+
+## Example
+
+[JELoginHandler](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/jeloginhandler/index.md) with MSAL OAuth.
+
+```csharp
+using XboxAuthNet.Game.Msal;
+
+var app = await MsalClientHelper.BuildApplicationWithCache("<CLIENT-ID>");
+var loginHandler = JELoginHandlerBuilder.BuildDefault();
+
+var authenticator = loginHandler.CreateAuthenticatorWithNewAccount(default);
+authenticator.AddMsalOAuth(app, msal => msal.Interactive());
+authenticator.AddXboxAuthForJE(xbox => xbox.Basic());
+authenticator.AddJEAuthenticator();
+var session = await authenticator.ExecuteForLauncherAsync();
+```
+
+## Interactive
+
+```csharp
+authenticator.AddMsalOAuth(app, msal => msal.Interactive());
+```
+
+Requests users to enter their Microsoft account. How the sign-in page is displayed is determined by the MSAL.
+
+## EmbeddedWebView
+
+```csharp
+authenticator.AddMsalOAuth(app, msal => msal.EmbeddedWebView());
+```
+
+Prompts the user to enter their Microsoft account. Use WebView2 to display the login page.
+
+## SystemBrowser
+
+```csharp
+authenticator.AddMsalOAuth(app, msal => msal.SystemBrowser());
+```
+
+Prompts the user to enter their Microsoft account. Open the system's default browser to display the sign-in page.
+
+## Silent
+
+```csharp
+authenticator.AddMsalOAuth(app, msal => msal.Silent());
+```
+
+Attempts to sign in using the account information cached in the MSAL.
+
+## DeviceCode
+
+```csharp
+authenticator.AddMsalOAuth(app, msal => msal.DeviceCode(deviceCode =>
+{
+    Console.WriteLine(deviceCode.Message);
+    return Task.CompletedTask;
+}));
+```
+
+Attempt to sign in using the DeviceCode method. This method doesn't require a web browser or UI on the client, but it does allow the client to log in from a different device.
+
+If you're building a launcher that only works on the console or no GUI environment, use this method for login. The login can be done on a completely different device than the one running your launcher. For example, a user can log in from their mobile phone.
+
+The example code outputs the following message to the console:
+
+```text
+To sign in, use a web browser to open the page https://www.microsoft.com/link and enter the code XXXXXXXX to authenticate.
+```
+
+## FromResult
+
+```csharp
+var result = await app.AcquireTokenInteractive(MsalClientHelper.XboxScopes).ExecuteAsync();
+authenticator.AddMsalOAuth(app, msal => msal.FromResult(result));
+```
+
+Use MSAL authentication result.
+
+## API Reference
+
+- [MsalOAuthBuilder](https://cmllib.github.io/CmlLib.Core.Auth.Microsoft/api/XboxAuthNet.Game.Msal.MsalOAuthBuilder.html)
+# MojangAPI
+
+# Home
+
+[GitHub](https://github.com/CmlLib/MojangAPI)
+
+.NET Library for [Mojang API](https://wiki.vg/Mojang_API), [Mojang Authentication](https://wiki.vg/Authentication) and [Microsoft Xbox Authentication](https://wiki.vg/Microsoft_Authentication_Scheme)
+
+- Asynchronous API
+- Getting Player Data
+- Changing Player Name or Skin
+- Mojang Authentication
+- Microsoft Authentication
+- Security Question-Answer
+- Statistics
+
+Support:
+
+- netstandard 2.0
+
+## Install
+
+Use Nuget package [MojangAPI](https://www.nuget.org/packages/MojangAPI)
+
+```text
+dotnet add package MojangAPI
+```
+
+## Usage
+
+Include these namespaces :
+
+```csharp
+using MojangAPI;
+using MojangAPI.Model;
+```
+
+Sample program: [MojangAPISample](https://github.com/CmlLib/MojangAPI/tree/master/MojangAPISample)
+
+### [Mojang API](https://cmllib.github.io/CmlLib.Core-wiki/en/mojangapi/mojang-api/index.md)
+
+Getting player profile, Changing name or skin, Statistics, Blocked Server, Checking Game Ownership
+
+### [SecurityQuestion](https://cmllib.github.io/CmlLib.Core-wiki/en/mojangapi/securityquestion/index.md)
+
+Security question-answer flow
+
+### Authentication
+
+For authentication, See [Login and Sessions](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/login-and-sessions/index.md) or use library [CmlLib.Core.Auth.Microsoft](https://cmllib.github.io/CmlLib.Core-wiki/en/auth.microsoft/cmllib.core.auth.microsoft/index.md).
+
+# Mojang API
+
+If the request is failed, it throws appropriate exception. For example, `MojangException` is thrown when the mojang server returns error message.
+
+## How to get `AccessToken` or `UUID`?
+
+You can get these token by Mojang Authentication or Microsoft Xbox Authentication. See [Login and Sessions](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/login-and-sessions/index.md).
+
+```csharp
+var session = await loginHandler.Authenticate();
+var username = session.Username;
+var uuid = session.UUID;
+```
+
+## Methods
+
+### GetUUID
+
+username -> uuid
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+PlayerUUID uuid = await mojang.GetUUID("username");
+
+// uuid.UUID
+// uuid.IsLegacy
+// uuid.IsDemo
+```
+
+### GetUUIDs
+
+usernames -> uuids
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+PlayerUUID[] uuids = await mojang.GetUUIDs(new string[] { "user1", "user2" });
+
+foreach (PlayerUUID uuid in uuids)
+{
+    Console.WriteLine(uuid.UUID);
+}
+```
+
+### GetNameHistories
+
+*note: this api has been deprecated by Mojang*
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+NameHistory[] response = await mojang.GetNameHistories("uuid");
+
+foreach (NameHistory item in response.Histories)
+{
+    // item.Name
+    // item.ChangedToAt
+    // item.ChangedTime
+}
+```
+
+### GetProfileUsingUUID
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+PlayerProfile profile = await mojang.GetProfileUsingUUID("uuid");
+
+// profile.UUID
+// profile.Name
+// profile.Skin
+// profile.IsLegacy
+```
+
+### GetProfileUsingAccessToken
+
+*note: this api only works on xbox account*
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+PlayerProfile profile = await mojang.GetProfileUsingAccessToken("accessToken");
+```
+
+### GetPlayerAttributes
+
+*note: this api only works on xbox account*
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+PlayerAttributes attributes = await mojang.GetPlayerAttributes("accessToken");
+
+// attributes.Privileges.OnlineChat
+// attributes.Privileges.MultiplayerServer
+// attributes.Privileges.MultiplayerRealms
+// attributes.Privileges.Telemtry
+// attributes.ProfanityFilterPreferences.ProfanityFilterOn
+```
+
+### GetPlayerBlocklist
+
+*note: this api only works on xbox account*
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+string[] blocklists = await mojang.GetPlayerBlocklist("accessToken");
+```
+
+### GetPlayerCertificates
+
+*note: this api only works on xbox account*
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+PlayerCertificates certs = await mojang.GetPlayerCertificates("accessToken");
+
+// certs.KeyPair.PrivateKey
+// certs.KeyPair.PublicKey
+// certs.PublicKeySignature
+// certs.ExpiresAt
+// certs.RefreshedAfter
+```
+
+### CheckNameAvailability
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+string? result = await mojang.CheckNameAvailability("accessToken", "newName");
+```
+
+### ChangeName
+
+*note: this api only works on xbox account*
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+PlayerProfile profile = await mojang.ChangeName("accessToken", "newName");
+```
+
+### ChangeSkin
+
+*note: this api only works on xbox account*
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+
+// SkinType.Steve or SkinType.Alex
+PlayerProfile response = await mojang.ChangeSkin("uuid", "accessToken", SkinType.Steve, "skinUrl");
+```
+
+### UploadSkin
+
+*note: this api only works on xbox account*
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+
+// SkinType.Steve or SkinType.Alex
+await mojang.UploadSkin("accessToken", SkinType.Steve, "skin_png_file_path");
+```
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+Stream stream; // create stream for uploading skin
+await mojang.UploadSkin("accessToken", SkinType.Steve, stream, "file_name");
+```
+
+### ResetSkin
+
+*note: this api only works on xbox account*
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+await mojang.ResetSkin("uuid", "accessToken");
+```
+
+### GetBlockedServer
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+string[] servers = await mojang.GetBlockedServer();
+```
+
+### GetStatistics
+
+*note: this api was obsoleted by mojang*
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+Statistics stats = await mojang.GetStatistics(
+    StatisticOption.ItemSoldMinecraft,
+    StatisticOption.ItemSoldCobalt
+);
+
+// stats.Total
+// stats.Last24h
+// stats.SaleVelocityPerSeconds
+```
+
+### CheckGameOwnership
+
+*note1: this api only works on xbox account*\
+*note2: this api does not check xbox game pass. if the user has xbox game pass instead of purchase minecraft, this api return `false`. but the user owns minecraft and can play it.*
+
+```csharp
+Mojang mojang = new Mojang(new HttpClient());
+bool result = await mojang.CheckGameOwnership("accessToken");
+
+if (result)
+    Console.WriteLine("You have Minecraft JE");
+else
+    Console.WriteLine("You don't have Minecraft JE");
+```
+
+# SecurityQuestion
+
+This is required to get the skin change endpoint to work in case the services do not trust your IP yet.
+
+Most methods return `MojangAPIResponse` or class inherited from `MojangAPIResponse`.\
+You can check whether the request was successful or failed to check `IsSuccess` property in `MojangAPIResponse`.\
+If `IsSuccess` is false, `Error` and `ErrorMessage` property tell you why the request failed.
+
+Example:
+
+```csharp
+using MojangAPI.SecurityQuestion;
+
+HttpClient httpClient = new HttpClient();
+QuestionFlow questionFlow = new QuestionFlow(httpClient);
+
+try
+{
+    await questionFlow.CheckTrusted("accessToken");
+    Console.WriteLine("Your IP was trusted");
+}
+catch
+{
+    QuestionList questions = await questionFlow.GetQuestionList("accessToken");
+    for (int i = 0; i < questions.Count; i++)
+    {
+        Question question = questions[i];
+        Console.WriteLine($"Q{i + 1}. [{question.QuestionId}] {question.QuestionMessage}");
+        Console.Write("Answer? : ");
+
+        var answer = Console.ReadLine();
+        question.Answer = answer;
+        Console.WriteLine();
+    }
+
+    await questionFlow.SendAnswers(questions, session.AccessToken);
+    Console.WriteLine("Success");
+}
+```
+
+## Methods (QuestionFlow class)
+
+### CheckTrusted
+
+Check if security questions are needed.
+
+```csharp
+try
+{
+    await questionFlow.CheckTrusted("accessToken");
+    // trusted
+}
+catch 
+{
+    // security questions are needed
+}
+```
+
+### GetQuestionList
+
+```csharp
+QuestionList questionList = await questionFlow.GetQuestionList("accessToken");
+foreach (Question q in questionList)
+{
+    // q.QuestionId
+    // q.QuestionMessage
+    // q.AnswerId
+    // q.Answer
+}
+```
+
+### SendAnswers
+
+```csharp
+QuestionList list; // you can get this from GetQuestionsList method, like 'questionList' variable above.
+await questionFlow.SendAnswers(list, "accessToken");
+```
+# Installer.Forge
+
+# Home
+
+[GitHub](https://github.com/CmlLib/CmlLib.Core.Installer.Forge)
+
+Forge Installer for [CmlLib.Core](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/index.md).
+
+## Features
+
+- Forge Developer Support! After successfully installing the Forge version, the Forge advertising page will automatically open for you.
+- Automatic change of links to install Forge
+- Automatic installation of the Vanilla version of Minecraft before installing Forge
+- Skipping the Forge re-installation
+
+## API Reference
+
+For accurate type information, namespace, and method signatures, refer to the [API Reference](https://cmllib.github.io/CmlLib.Core.Installer.Forge/api/toc.html). When using with LLMs, make sure to include this URL as well.
+
+## LLM
+
+[llms.txt](https://cmllib.github.io/CmlLib.Core-wiki/en/llms.txt) is provided.
+
+# ForgeInstaller
+
+ForgeInstaller provides functionality to download and install Forge versions for Minecraft.
+
+## Initializing the Installer
+
+```csharp
+var path = new MinecraftPath();
+var launcher = new MinecraftLauncher(path);
+var forgeInstaller = new ForgeInstaller(launcher);
+```
+
+Optionally, you can configure the HttpClient used to access the Forge website by using `new ForgeInstaller(launcher, new HttpClient())`.
+
+## Listing Available Versions
+
+```csharp
+var versions = await forgeInstaller.GetForgeVersions("1.20.1");
+foreach (var version in versions)
+{
+    Console.WriteLine();
+    Console.WriteLine("MinecraftVersion: " + version.MinecraftVersionName);
+    Console.WriteLine("ForgeVersion: " + version.ForgeVersionName);
+    Console.WriteLine("Time: " + version.Time);
+    Console.WriteLine("IsLatestVersion: " + version.IsLatestVersion);
+    Console.WriteLine("IsRecommendedVersion: " + version.IsRecommendedVersion);
+
+    var installerFile = version.GetInstallerFile();
+    if (installerFile != null)
+    {
+        Console.WriteLine("Type: " + installerFile.Type);
+        Console.WriteLine("DirectUrl: " + installerFile.DirectUrl);
+        Console.WriteLine("AdUrl: " + installerFile.AdUrl);
+        Console.WriteLine("MD5: " + installerFile.MD5);
+        Console.WriteLine("SHA1: " + installerFile.SHA1);
+    }
+}
+```
+
+This retrieves all available Forge versions that can be installed for the specified Minecraft version.
+
+## Installation
+
+### Installing the Best Version
+
+```csharp
+var installedVersionName = await forgeInstaller.Install("1.20.1", new ForgeInstallOptions());
+```
+
+This finds and installs the most appropriate Forge version available for Minecraft 1.20.1.
+
+The appropriate version is selected using the following priority rules:
+
+1. First version with the 'Recommended Version' flag
+1. First version with the 'Latest Version' flag
+1. The topmost version in the version list
+
+### Installing a Specific Version
+
+```csharp
+var installedVersionName = await forgeInstaller.Install("1.20.1", "47.1.0", new ForgeInstallOptions());
+```
+
+This installs Forge version 47.1.0 for Minecraft 1.20.1.
+
+### Installing the Latest Version
+
+```csharp
+var versions = await forgeInstaller.GetForgeVersions("1.20.1");
+var latestVersion = versions.First(v => v.IsLatestVersion);
+var installedVersionName = await forgeInstaller.Install(latestVersion, new ForgeInstallOptions());
+```
+
+This finds and installs the latest Forge version available for Minecraft 1.20.1.
+
+## Installation Options
+
+To use features like installation progress display and cancellation, configure the appropriate values in `ForgeInstallOptions`.
+
+```csharp
+var installOptions = new ForgeInstallOptions
+{
+    FileProgress = new Progress<InstallerProgressChangedEventArgs>(e =>
+        Console.WriteLine($"[{e.EventType}][{e.ProgressedTasks}/{e.TotalTasks}] {e.Name}")),
+    ByteProgress = new Progress<ByteProgress>(e =>
+        Console.WriteLine(e.ToRatio() * 100 + "%")),
+    InstallerOutput = new Progress<string>(e =>
+        Console.WriteLine(e)),
+    CancellationToken = CancellationToken.None,
+
+    JavaPath = "java.exe",
+    SkipIfAlreadyInstalled = true,
+};
+var installedVersionName = await forgeInstaller.Install("1.20.1", installOptions);
+```
+
+- **FileProgress** and **ByteProgress**: Report file download progress. See [Event Handling](https://cmllib.github.io/CmlLib.Core-wiki/en/cmllib.core/getting-started/Handling-Events/index.md) for more details.
+- **InstallerOutput**: Reports logs output from the installer's console.
+- **CancellationToken**: Allows you to cancel the installation process.
+- **JavaPath**: Sets the path to the Java runtime used to execute the installer. The default value is `null`, which automatically determines the Java runtime path.
+- **SkipIfAlreadyInstalled**: When set to `true`, skips installation if the target version is already installed. The default value is `true`.
+
+## Important Note About Complete Installation
+
+`forgeInstaller.Install` does not fully install the Forge version. The version still needs additional files such as sound assets, Java runtime, and vanilla version files. Therefore, you should always call `launcher.InstallAsync` before launching the game.
+
+```csharp
+// Install Forge
+var versionName = await forgeInstaller.Install("1.20.1", new ForgeInstallOptions());
+
+// Install remaining dependencies (sound assets, Java runtime, vanilla version)
+await launcher.InstallAsync(versionName);
+
+// Launch the game
+var process = await launcher.BuildProcessAsync(versionName, new MLaunchOption
+{
+    MaximumRamMb = 1024,
+    Session = MSession.CreateOfflineSession("Gamer123"),
+});
+process.Start();
+```
+
+## About Ads
+
+`ForgeInstaller` will display an ad page after a successful installation. The official Forge installer shows the following message:
+
+```text
+Please do not automate the download and installation of Forge.
+Our efforts are supported by ads from the download page.
+If you MUST automate this, please consider supporting the project through https://www.patreon.com/LexManos
+```
+
+If you want to disable this behavior, you can modify the [ForgeInstaller source code](https://github.com/CmlLib/CmlLib.Core.Installer.Forge/blob/main/CmlLib.Core.Installer.Forge/ForgeInstaller.cs) yourself.
+
+## API Reference
+
+- [ForgeInstaller](https://cmllib.github.io/CmlLib.Core.Installer.Forge/api/CmlLib.Core.Installer.Forge.ForgeInstaller.html)
+- [ForgeInstallOptions](https://cmllib.github.io/CmlLib.Core.Installer.Forge/api/CmlLib.Core.Installer.Forge.ForgeInstallOptions.html)
+
+# Getting Started
+
+## Install
+
+Install nuget package [CmlLib.Core.Installer.Forge](https://www.nuget.org/packages/CmlLib.Core.Installer.Forge)
+
+```text
+dotnet add package CmlLib.Core.Installer.Forge
+```
+
+## Example
+
+```csharp
+using CmlLib.Core;
+using CmlLib.Core.Auth;
+using CmlLib.Core.Installer.Forge;
+using CmlLib.Core.Installers;
+using CmlLib.Core.ProcessBuilder;
+
+var path = new MinecraftPath(); // use default directory
+var launcher = new MinecraftLauncher(path);
+var forgeInstaller = new ForgeInstaller(launcher);
+
+var fileProgress = new Progress<InstallerProgressChangedEventArgs>(e =>
+        Console.WriteLine($"[{e.EventType}][{e.ProgressedTasks}/{e.TotalTasks}] {e.Name}"));
+var byteProgress = new Progress<ByteProgress>(e =>
+        Console.WriteLine(e.ToRatio() * 100 + "%"));
+
+// install forge
+// show launch progress to console
+var versionName = await forgeInstaller.Install("1.20.1", new ForgeInstallOptions
+{
+    FileProgress = fileProgress,
+    ByteProgress = byteProgress,
+    InstallerOutput = new Progress<string>(e =>
+        Console.WriteLine(e)),
+});
+
+// ForgeInstaller does not fully install the version, you still need to call InstallAsync
+await launcher.InstallAsync(versionName, fileProgress, byteProgress);
+var process = await launcher.BuildProcessAsync(versionName, new MLaunchOption
+{
+    MaximumRamMb = 1024,
+    Session = MSession.CreateOfflineSession("Gamer123"),
+});
+
+// print game logs
+var processUtil = new ProcessWrapper(process);
+processUtil.OutputReceived += (s, e) => Console.WriteLine(e);
+processUtil.StartWithEvents();
+await processUtil.WaitForExitTaskAsync();
+```
+
+## Sample Installer
+
+[SampleForgeInstaller](https://github.com/CmlLib/CmlLib.Core.Installer.Forge/blob/main/SampleForgeInstaller/Program.cs)
+
+## API Reference
+
+- [ForgeInstaller](https://cmllib.github.io/CmlLib.Core.Installer.Forge/api/CmlLib.Core.Installer.Forge.ForgeInstaller.html)
+- [ForgeInstallOptions](https://cmllib.github.io/CmlLib.Core.Installer.Forge/api/CmlLib.Core.Installer.Forge.ForgeInstallOptions.html)
+
+# Supported Versions
+
+This library aims to support installations of all versions of Forge since 1.7.10. Versions prior to 1.7.10 can be installed, but it needs some work. You can find instructions for this further down on this page. All versions after 1.7.10 should install and run normally. If it doesn't work, please open an issue.
+
+## Summary
+
+| Range                          | Summary                                 |
+| ------------------------------ | --------------------------------------- |
+| 1.1 ~ 1.7.2                    | ⚠️Partially Support                     |
+| 1.7.10 ~ 1.21.4                | ✅ SUPPORT, tested                      |
+| after 1.21.4 ~ future versions | ✅ SUPPORT, not tested, but should work |
+
+## All Test Results
+
+The version name following the check icon means the version of Forge used in the test. The version of Forge used in the test is either the recommended version or the most recent version. A successfully tested version of Minecraft should be able to install and run with other Forge versions.
+
+Versions not listed in this table are untested. Again, versions after 1.7.10 should be able to install and run even if they are not in this table.
+
+| Version     | Test Result                                    |
+| ----------- | ---------------------------------------------- |
+| 1.21.4      | ✅ 1.21.4-forge-54.1.0                         |
+| 1.20.6      | ✅ 1.20.6-forge-50.2.0                         |
+| 1.20.1      | ✅ 1.20.1-forge-47.1.0                         |
+| 1.20        | ✅ 1.20-forge-46.0.14                          |
+| 1.19.4      | ✅ 1.19.4-forge-45.1.0                         |
+| 1.19.3      | ✅ 1.19.3-forge-44.1.0                         |
+| 1.19.2      | ✅ 1.19.2-forge-43.2.0                         |
+| 1.19.1      | ✅ 1.19.1-forge-42.0.9                         |
+| 1.19        | ✅ 1.19-forge-41.1.0                           |
+| 1.18.2      | ✅ 1.18.2-forge-40.2.0                         |
+| 1.18.1      | ✅ 1.18.1-forge-39.1.0                         |
+| 1.18        | ✅ 1.18-forge-38.0.17                          |
+| 1.17.1      | ✅ 1.17.1-forge-37.1.1                         |
+| 1.16.5      | ✅ 1.16.5-forge-36.2.34                        |
+| 1.16.4      | ✅ 1.16.4-forge-35.1.4                         |
+| 1.16.3      | ✅ 1.16.3-forge-34.1.0                         |
+| 1.16.2      | ✅ 1.16.2-forge-33.0.61                        |
+| 1.16.1      | ✅ 1.16.1-forge-32.0.108                       |
+| 1.15.2      | ✅ 1.15.2-forge-31.2.57                        |
+| 1.15.1      | ✅ 1.15.1-forge-30.0.51                        |
+| 1.15        | ✅ 1.15-forge-29.0.4                           |
+| 1.14.4      | ✅ 1.14.4-forge-28.2.26                        |
+| 1.14.3      | ✅ 1.14.3-forge-27.0.60                        |
+| 1.14.2      | ✅ 1.14.2-forge-26.0.63                        |
+| 1.13.2      | ✅ 1.13.2-forge-25.0.223                       |
+| 1.12.2      | ✅ 1.12.2-forge-14.23.5.2859                   |
+| 1.12.1      | ✅ 1.12.1-forge1.12.1-14.22.1.2478             |
+| 1.12        | ✅ 1.12-forge1.12-14.21.1.2387                 |
+| 1.11.2      | ✅ 1.11.2-forge1.11.2-13.20.1.2588             |
+| 1.11        | ✅ 1.11-forge1.11-13.19.1.2189                 |
+| 1.10.2      | ✅ 1.10.2-forge1.10.2-12.18.3.2511             |
+| 1.10        | ✅ 1.10-forge1.10-12.18.0.2000-1.10.0          |
+| 1.9.4       | ✅ 1.9.4-forge1.9.4-12.17.0.2317-1.9.4         |
+| 1.9         | ✅ 1.9-forge1.9-12.16.1.1887                   |
+| 1.8.9       | ✅ 1.8.9-forge1.8.9-11.15.1.2318-1.8.9         |
+| 1.8.8       | ✅ 1.8.8-forge1.8.8-11.15.0.1655               |
+| 1.7.10      | ✅ 1.7.10-Forge10.13.4.1614-1.7.10             |
+| 1.7.10_pre4 | ❌ cannot detect game version                  |
+| 1.7.2       | ❌ game crash                                  |
+| 1.6.4       | ⚠️ 1.6.4-Forge9.11.1.1345, requiring arguments |
+| 1.6.3       | ⚠️ 1.6.3-Forge9.11.0.878, requiring arguments  |
+| 1.6.2       | ⚠️ 1.6.2-Forge9.10.1.871, requiring arguments  |
+| 1.6.1       | ⚠️ Forge8.9.0.775, requiring arguments         |
+| 1.5.2       | ⚠️ 1.5.2-Forge7.8.1.738, requiring libraries   |
+| 1.5.1       | ⚠️ 1.5.1-Forge7.7.2.682, requiring libraries   |
+| 1.5         | ⚠️ 1.5-Forge7.7.0.598, requiring libraries     |
+| 1.4.7       | ⚠️ 1.4.7-Forge6.6.2.534, requiring libraries   |
+| 1.4.6       | ⚠️ 1.4.6-Forge6.5.0.489, requiring libraries   |
+| 1.4.5       | ⚠️ 1.4.5-Forge6.4.2.448, requiring libraries   |
+| 1.4.4       | ⚠️ 1.4.4-Forge6.3.0.378, requiring libraries   |
+| 1.4.3       | ⚠️ 1.4.3-Forge6.2.1.358, requiring libraries   |
+| 1.4.2       | ⚠️ 1.4.2-Forge6.0.1.355, requiring libraries   |
+| 1.4.1       | ⚠️ 1.4.1-Forge6.0.0.329, requiring libraries   |
+| 1.3.2       | ⚠️ 1.3.2-Forge4.3.5.318, requiring libraries   |
+| 1.2.5       | ✅ 1.2.5-Forge3.4.9.171                        |
+| 1.2.4       | ⚠️ 1.2.4-Forge2.0.0.68, requiring ModLoader    |
+| 1.2.3       | ⚠️ 1.2.3-Forge1.4.1.64, requiring ModLoader    |
+| 1.1         | ⚠️1.1-Forge1.3.4.29, requiring ModLoader       |
+
+## For 1.1 ~ 1.2.4
+
+Older versions of Forge were not standalone. These versions require [ModLoader](https://mcarchive.net/mods/modloader). You have to patch ModLoader after installing these Forge versions.
+
+## For 1.3.2 ~ 1.5.2
+
+| Game Version                      | File Name                    | SHA1 Checksum                              |
+| --------------------------------- | ---------------------------- | ------------------------------------------ |
+| 1.3.2, 1.4.1, 1.4.2, 1.4.3, 1.4.4 | asm-all-4.0.jar              | `2518725354c7a6a491a323249b9e86846b00df09` |
+| 1.3.2, 1.4.1, 1.4.2, 1.4.3, 1.4.4 | guava-12.0.1.jar             | `b8e78b9af7bf45900e14c6f958486b6ca682195f` |
+| 1.3.2, 1.4.1, 1.4.2, 1.4.3, 1.4.4 | argo-2.25.jar                | `bb672829fde76cb163004752b86b0484bd0a7f4b` |
+| 1.4.5, 1.4.6, 1.4.7               | asm-all-4.0.jar              | `2518725354c7a6a491a323249b9e86846b00df09` |
+| 1.4.5, 1.4.6, 1.4.7               | guava-12.0.1.jar             | `b8e78b9af7bf45900e14c6f958486b6ca682195f` |
+| 1.4.5, 1.4.6, 1.4.7               | argo-2.25.jar                | `bb672829fde76cb163004752b86b0484bd0a7f4b` |
+| 1.4.5, 1.4.6, 1.4.7               | bcprov-jdk15on-147.jar       | `2518725354c7a6a491a323249b9e86846b00df09` |
+| 1.5                               | argo-small-3.2.jar           | `bb672829fde76cb163004752b86b0484bd0a7f4b` |
+| 1.5                               | guava-14.0-rc3.jar           | `931ae21fa8014c3ce686aaa621eae565fefb1a6a` |
+| 1.5                               | asm-all-4.1.jar              | `054986e962b88d8660ae4566475658469595ef58` |
+| 1.5                               | bcprov-jdk15on-1.48.jar      | `960dea7c9181ba0b17e8bab0c06a43f0a5f04e65` |
+| 1.5                               | deobfuscation_data_1.5.zip   | `22e221a0d89516c1f721d6cab056a7e37471d0a6` |
+| 1.5                               | scala-library.jar            | `458D046151AD179C85429ED7420FFB1EAF6DDF85` |
+| 1.5.1                             | argo-small-3.2.jar           | `bb672829fde76cb163004752b86b0484bd0a7f4b` |
+| 1.5.1                             | guava-14.0-rc3.jar           | `931ae21fa8014c3ce686aaa621eae565fefb1a6a` |
+| 1.5.1                             | asm-all-4.1.jar              | `054986e962b88d8660ae4566475658469595ef58` |
+| 1.5.1                             | bcprov-jdk15on-1.48.jar      | `960dea7c9181ba0b17e8bab0c06a43f0a5f04e65` |
+| 1.5.1                             | deobfuscation_data_1.5.1.zip | `446e55cd986582c70fcf12cb27bc00114c5adfd9` |
+| 1.5.1                             | scala-library.jar            | `458D046151AD179C85429ED7420FFB1EAF6DDF85` |
+| 1.5.2                             | deobfuscation_data_1.5.2.zip | `5f7c142d53776f16304c0bbe10542014abad6af8` |
+
+Locate these files in `<game_directory>/lib` .
+
+## For 1.6.1 ~ 1.6.4
+
+Requires an additional JVM argument: `-Dfml.ignoreInvalidMinecraftCertificates=true`
+
+For example:
+
+```csharp
+var process = await _launcher.InstallAndBuildProcessAsync("1.6.4-Forge9.11.1.1345", new MLaunchOption
+{
+    Session = MSession.CreateOfflineSession("tester123"),
+    ExtraJvmArguments = new[]
+    {
+        new MArgument("-Dfml.ignoreInvalidMinecraftCertificates=true"),
+    }
+});
+process.Start();
+```
+# 런처 주문제작
+
+# [AD] 커스텀 런처 주문제작
+
+커스텀 런처를 주문제작 받고 있습니다. 직접 프로그래밍 할 필요 없이 커스텀 런처 제작에 필요한 모든 기능을 만들어 드립니다.
+
+국내 대형 포켓몬 서버, 유명 스트리머/BJ 컨텐츠 서버부터 개인용 모드 런처까지 100개 이상 커스텀 런처를 제작해왔습니다.
+
+**디스코드 ksi123456ab 로 연락 주세요!**
+
+[주문 제작 신청하기](https://cafe.naver.com/alphacml/76)
+
+[제작한 런처 보기](https://cafe.naver.com/alphacml)
